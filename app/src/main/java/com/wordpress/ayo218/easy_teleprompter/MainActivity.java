@@ -2,29 +2,19 @@ package com.wordpress.ayo218.easy_teleprompter;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    @BindView(R.id.script_view)
-    RecyclerView recyclerView;
-    List<Scripts> scriptsList = new ArrayList<>();
-    ScriptsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,29 +23,21 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ButterKnife.bind(this);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        initViews();
+        initFragment();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void initViews() {
-        scriptsList.add(new Scripts("Default"));
-        scriptsList.add(new Scripts("App presentation"));
-        scriptsList.add(new Scripts("Movie"));
-        scriptsList.add(new Scripts("School"));
-
-
-        adapter = new ScriptsAdapter(this, scriptsList);
-
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+    private void initFragment() {
+        ScriptFragment fragment = new ScriptFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_fragment, fragment);
+        transaction.commit();
     }
 
     @Override
