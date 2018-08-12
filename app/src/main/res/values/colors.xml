@@ -9,4 +9,7 @@
 
     <color name="immersive_bars">#99000000</color>
     <color name="background_dark">#ff333333</color>
+
+    <color name="gray">#888888</color>
+    <color name="gray_dark">#555555</color>
 </resources>

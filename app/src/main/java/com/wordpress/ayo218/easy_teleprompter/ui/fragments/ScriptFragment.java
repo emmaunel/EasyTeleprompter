@@ -11,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wordpress.ayo218.easy_teleprompter.GridSpacingItemDecoration;
 import com.wordpress.ayo218.easy_teleprompter.R;
+import com.wordpress.ayo218.easy_teleprompter.Utils.GridSpacingItemDecoration;
 import com.wordpress.ayo218.easy_teleprompter.adapters.ScriptsAdapter;
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
 
@@ -49,7 +49,7 @@ public class ScriptFragment extends Fragment {
         scriptsList.add(new Scripts("", "Size size size size size size size size size size size"));
         scriptsList.add(new Scripts("", "Char char char char char char char"));
         scriptsList.add(new Scripts("", "Dog dog dog dog dog dog"));
-        scriptsList.add(new Scripts("TEst", "R"));
+        scriptsList.add(new Scripts("Test", "R"));
         scriptsList.add(new Scripts("", "Int hold dog cat hold hold hold cat hold hold dog hold int hold hold hold hold hold"));
 
 
@@ -79,6 +79,22 @@ public class ScriptFragment extends Fragment {
 
             }
         };
+
+//        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN
+//         | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+//            @Override
+//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+//                int source = viewHolder.getAdapterPosition();
+//                int target = viewHolder1.getAdapterPosition();
+//                adapter.notifyItemMoved(source, target);
+//                return true;
+//            }
+//
+//            @Override
+//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+//                adapter.notifyItemRemoved(i);
+//            }
+//        }).attachToRecyclerView(recyclerView);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);

@@ -1,4 +1,4 @@
-package com.wordpress.ayo218.easy_teleprompter;
+package com.wordpress.ayo218.easy_teleprompter.Utils;
 
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
