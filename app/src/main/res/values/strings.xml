@@ -9,4 +9,8 @@
     <string name="back">back</string>
     <string name="menu">menu</string>
     <string name="tool">tool</string>
+    <string name="transition_script_edit_dialog">Script Dialog</string>
+    <string name="title_hint">Title</string>
+    <string name="choose_a_background_color">Choose a background color:</string>
+    <string name="dialog_ok">OK</string>
 </resources>

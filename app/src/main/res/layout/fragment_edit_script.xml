@@ -13,23 +13,6 @@
         android:layout_above="@+id/bottom_toolbar">
 
         <EditText
-            android:id="@+id/script_title_txt"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:focusable="true"
-            android:focusedByDefault="false"
-            android:focusableInTouchMode="true"
-            android:hint="Title"
-            android:textColorHint="@android:color/white"
-            android:paddingTop="8dp"
-            android:paddingStart="12dp"
-            android:inputType="textCapSentences"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:paddingLeft="12dp" />
-
-        <EditText
             android:id="@+id/script_content_txt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -151,7 +134,7 @@
             android:minHeight="50dp">
 
             <ImageButton
-                android:id="@+id/note_types_button"
+                android:id="@+id/script_play_button"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:background="?android:attr/selectableItemBackground"

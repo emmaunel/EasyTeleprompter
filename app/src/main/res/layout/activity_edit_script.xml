@@ -28,6 +28,12 @@
             android:contentDescription="@string/back"
             android:focusable="true" />
 
+        <TextView
+            android:id="@+id/script_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/large_text"/>
         <ImageView
             android:id="@+id/delete_btn"
             android:layout_width="@dimen/toolbar_height"

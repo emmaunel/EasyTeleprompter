@@ -12,12 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
-import com.wordpress.ayo218.easy_teleprompter.Utils.GridSpacingItemDecoration;
 import com.wordpress.ayo218.easy_teleprompter.adapters.ScriptsAdapter;
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
+import com.wordpress.ayo218.easy_teleprompter.utils.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,9 +44,6 @@ public class ScriptFragment extends Fragment {
         scriptsList.add(new Scripts("Default", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nullapariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."));
         scriptsList.add(new Scripts("Movie","Length length length length"));
         scriptsList.add(new Scripts("School", "String string string string"));
-        scriptsList.add(new Scripts("", "Content content content content"));
-        scriptsList.add(new Scripts("", "Size size size size size size size size size size size"));
-        scriptsList.add(new Scripts("", "Char char char char char char char"));
         scriptsList.add(new Scripts("", "Dog dog dog dog dog dog"));
         scriptsList.add(new Scripts("Test", "R"));
         scriptsList.add(new Scripts("", "Int hold dog cat hold hold hold cat hold hold dog hold int hold hold hold hold hold"));
@@ -60,33 +56,17 @@ public class ScriptFragment extends Fragment {
         int spacing = (int) (1 * scale + 0.5f);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(spacing));
 
-        ItemTouchHelper.Callback itemCallback = new ItemTouchHelper.Callback() {
-            @Override
-            public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
-                        ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
-            }
-
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                Collections.swap(scriptsList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
-                adapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
-                return true;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
-            }
-        };
-
-//        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN
-//         | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+//        ItemTouchHelper.Callback itemCallback = new ItemTouchHelper.Callback() {
 //            @Override
-//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-//                int source = viewHolder.getAdapterPosition();
-//                int target = viewHolder1.getAdapterPosition();
-//                adapter.notifyItemMoved(source, target);
+//            public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+//                return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
+//                        ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
+//            }
+//
+//            @Override
+//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+//                Collections.swap(scriptsList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+//                adapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
 //                return true;
 //            }
 //
@@ -94,10 +74,25 @@ public class ScriptFragment extends Fragment {
 //            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 //                adapter.notifyItemRemoved(i);
 //            }
-//        }).attachToRecyclerView(recyclerView);
+//        };
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN
+         | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                int source = viewHolder.getAdapterPosition();
+                int target = viewHolder1.getAdapterPosition();
+                adapter.notifyItemMoved(source, target);
+                return true;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                adapter.notifyItemRemoved(i);
+            }
+        }).attachToRecyclerView(recyclerView);
+
+//        d
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
     }
