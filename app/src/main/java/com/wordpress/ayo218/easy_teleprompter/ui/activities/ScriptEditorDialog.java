@@ -13,8 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
+import com.wordpress.ayo218.easy_teleprompter.ui.fragments.EditScriptFragment;
 import com.wordpress.ayo218.easy_teleprompter.utils.FabDialogMorphSetup;
 import com.wordpress.ayo218.easy_teleprompter.utils.TransitionHelper;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,12 +36,15 @@ public class ScriptEditorDialog extends AppCompatActivity {
     @BindView(R.id.script_title_txt)
     EditText scriptTitleTxt;
 
+    String creationDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_script_editor_dialog);
         ButterKnife.bind(this);
 
+        creationDate = new SimpleDateFormat("MM/dd/yyyy hh:mm", Locale.getDefault()).format(new Date());
         //Begin fab <-> Dialog and Dialog <-> fab animation
         FabDialogMorphSetup.setupSharedElementTransitions(this, container, getResources().getDimensionPixelSize(R.dimen.dialog_corners));
     }
@@ -57,6 +65,7 @@ public class ScriptEditorDialog extends AppCompatActivity {
         Intent intent = new Intent(this, EditScriptActivity.class);
         intent.putExtra(EXTRA, SLIDE);
         intent.putExtra(Intent.EXTRA_TEXT, inputTitle);
+        intent.putExtra(EditScriptFragment.DATE_EXTRA, creationDate);
         Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, false);
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pairs);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

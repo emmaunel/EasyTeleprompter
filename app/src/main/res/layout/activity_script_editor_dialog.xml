@@ -60,11 +60,11 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/script_background_red"
+                android:id="@+id/script_background_dark"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:scaleType="center"
-                android:src="@drawable/circle_red" />
+                android:src="@drawable/circle_dark" />
 
             <ImageView
                 android:id="@+id/script_background_pink"

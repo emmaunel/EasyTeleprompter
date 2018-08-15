@@ -35,13 +35,13 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/large_text"/>
         <ImageView
-            android:id="@+id/delete_btn"
+            android:id="@+id/done_btn"
             android:layout_width="@dimen/toolbar_height"
             android:layout_height="@dimen/toolbar_height"
             android:layout_gravity="end|top"
-            app:srcCompat="@drawable/ic_delete"
+            app:srcCompat="@drawable/ic_check"
             android:clickable="true"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@drawable/ripple_circle"
             android:scaleType="center"
             tools:ignore="MissingPrefix"

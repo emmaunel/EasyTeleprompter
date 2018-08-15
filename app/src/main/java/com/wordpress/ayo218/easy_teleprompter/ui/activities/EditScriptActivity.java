@@ -19,12 +19,14 @@ import com.wordpress.ayo218.easy_teleprompter.ui.fragments.EditScriptFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class EditScriptActivity extends AppCompatActivity {
+public class EditScriptActivity extends AppCompatActivity{
     private static final String TAG = "EditScriptActivity";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.script_title)
     TextView title_txt;
+
+    String title;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -38,7 +40,7 @@ public class EditScriptActivity extends AppCompatActivity {
         getWindow().setEnterTransition(transition);
 
         //set title
-        String title = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+        title = getIntent().getStringExtra(Intent.EXTRA_TEXT);
         title_txt.setText(title);
 
         //toolbar
@@ -67,4 +69,5 @@ public class EditScriptActivity extends AppCompatActivity {
         startActivity(new Intent(EditScriptActivity.this, MainActivity.class));
         finish();
     }
+
 }
