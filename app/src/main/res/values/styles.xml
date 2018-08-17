@@ -12,6 +12,11 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    
+    <style name="AppTheme.Dialog" parent="AppTheme.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/dialog_background_scrim</item>
+    </style>
 
     <style name="AppTheme.Home">
         <item name="android:windowActionBarOverlay">true</item>
@@ -23,4 +28,5 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <color name="dialog_background_scrim">#99323232</color>
 </resources>

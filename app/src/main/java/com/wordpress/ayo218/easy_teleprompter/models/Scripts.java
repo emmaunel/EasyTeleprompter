@@ -1,31 +1,54 @@
 package com.wordpress.ayo218.easy_teleprompter.models;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+@Entity(tableName = "Scripts")
 public class Scripts implements Parcelable{
+
+    @PrimaryKey(autoGenerate = true)
+    private int uid;
+
     private String title;
     private String content;
     private String date_created;
+    private String date_updated;
 
+    @Ignore
     public Scripts() {
     }
 
+    @Ignore
     public Scripts(String title, String content) {
         this.title = title;
         this.content = content;
     }
 
-    public Scripts(String title, String content, String date_created) {
+    @Ignore
+    public Scripts(String title, String content, String date_created, String date_updated) {
         this.title = title;
         this.content = content;
         this.date_created = date_created;
+        this.date_updated = date_updated;
+    }
+
+    public Scripts(int uid, String title, String content, String date_created, String date_updated) {
+        this.uid = uid;
+        this.title = title;
+        this.content = content;
+        this.date_created = date_created;
+        this.date_updated = date_updated;
     }
 
     protected Scripts(Parcel in) {
+        uid = in.readInt();
         title = in.readString();
         content = in.readString();
         date_created = in.readString();
+        date_updated = in.readString();
     }
 
     public static final Creator<Scripts> CREATOR = new Creator<Scripts>() {
@@ -40,16 +63,44 @@ public class Scripts implements Parcelable{
         }
     };
 
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
         return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public String getDate_created() {
         return date_created;
+    }
+
+    public void setDate_created(String date_created) {
+        this.date_created = date_created;
+    }
+
+    public String getDate_updated() {
+        return date_updated;
+    }
+
+    public void setDate_updated(String date_updated) {
+        this.date_updated = date_updated;
     }
 
     @Override
@@ -58,9 +109,11 @@ public class Scripts implements Parcelable{
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(title);
-        parcel.writeString(content);
-        parcel.writeString(date_created);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(uid);
+        dest.writeString(title);
+        dest.writeString(content);
+        dest.writeString(date_created);
+        dest.writeString(date_updated);
     }
 }
