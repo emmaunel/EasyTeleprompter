@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Easy Teleprompter</string>
+    <string name="app_name">Promptr</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -13,4 +13,7 @@
     <string name="title_hint">Title</string>
     <string name="choose_a_background_color">Choose a background color:</string>
     <string name="dialog_ok">OK</string>
+    <string name="hint_note">Note</string>
+    <string name="last_modification_date">Last modification date</string>
+    <string name="script_actions">Script actions</string>
 </resources>

@@ -12,140 +12,133 @@
         android:orientation="vertical"
         android:layout_above="@+id/bottom_toolbar">
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/script_title_txt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent"
+                android:focusable="true"
+                android:hint="@string/title_hint"
+                android:inputType="textCapSentences"
+                android:paddingEnd="12dp"
+                android:paddingLeft="12dp"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:textColorHint="@android:color/white"
+                android:textSize="@dimen/large_text"
+                android:textStyle="bold" />
+
+        </android.support.design.widget.TextInputLayout>
+
         <EditText
             android:id="@+id/script_content_txt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="true"
-            android:focusedByDefault="false"
             android:focusableInTouchMode="true"
-            android:hint="Note"
+            android:focusedByDefault="false"
             android:gravity="top|start"
-            android:scrollbars="vertical"
-            android:paddingTop="8dp"
-            android:paddingStart="12dp"
+            android:hint="@string/hint_note"
+            android:inputType="textCapSentences|textMultiLine"
             android:paddingLeft="12dp"
-            android:inputType="textCapSentences"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:scrollbars="vertical"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/test"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_above="@id/script_action_layout"/>
-
-    <LinearLayout
-        android:id="@+id/script_action_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@id/bottom_toolbar">
-
-        <HorizontalScrollView
-            android:id="@+id/tools_scroll_view"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:scrollbars="none"
-            android:fillViewport="true">
-
-            <LinearLayout
-                android:id="@+id/tools_picker_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:gravity="center">
-
-                <!--<RadioGroup-->
-                    <!--android:id="@+id/tools_picker_radio_group"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <!--<RadioButton-->
-                        <!--android:layout_marginStart="10dp"-->
-                        <!--android:layout_marginEnd="12dp"-->
-                        <!--android:layout_width="35dp"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:background="@color/gray"-->
-                        <!--android:layout_marginLeft="10dp"-->
-                        <!--android:layout_marginRight="12dp" />-->
-                <!--</RadioGroup>-->
-
-                <ImageView
-                    android:background="@drawable/tool"
-                    app:srcCompat="@drawable/ic_bold"
-                    android:scaleType="center"
-                    android:clickable="true"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:focusable="true" />
-
-                <ImageView
-                    android:background="@drawable/tool"
-                    app:srcCompat="@drawable/ic_italic"
-                    android:scaleType="center"
-                    android:clickable="true"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:focusable="true" />
-
-                <ImageView
-                    android:background="@drawable/tool"
-                    app:srcCompat="@drawable/ic_underline"
-                    android:scaleType="center"
-                    android:clickable="true"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:focusable="true" />
-            </LinearLayout>
-        </HorizontalScrollView>
 
     </LinearLayout>
+
+    <!--<View-->
+        <!--android:id="@+id/test"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="4dp"-->
+        <!--android:layout_above="@id/script_action_layout"/>-->
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/script_action_layout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_above="@id/bottom_toolbar">-->
+
+        <!--<HorizontalScrollView-->
+            <!--android:id="@+id/tools_scroll_view"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:scrollbars="none"-->
+            <!--android:fillViewport="true">-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/tools_picker_layout"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:paddingTop="8dp"-->
+                <!--android:paddingBottom="8dp"-->
+                <!--android:gravity="center">-->
+
+                <!--&lt;!&ndash;<RadioGroup&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/tools_picker_radio_group"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<RadioButton&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginStart="10dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginEnd="12dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="35dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:background="@color/gray"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginLeft="10dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginRight="12dp" />&ndash;&gt;-->
+                <!--&lt;!&ndash;</RadioGroup>&ndash;&gt;-->
+
+                <!--<ImageView-->
+                    <!--android:background="@drawable/tool"-->
+                    <!--app:srcCompat="@drawable/ic_bold"-->
+                    <!--android:scaleType="center"-->
+                    <!--android:clickable="true"-->
+                    <!--android:layout_width="36dp"-->
+                    <!--android:layout_height="36dp"-->
+                    <!--android:focusable="true" />-->
+
+                <!--<ImageView-->
+                    <!--android:background="@drawable/tool"-->
+                    <!--app:srcCompat="@drawable/ic_italic"-->
+                    <!--android:scaleType="center"-->
+                    <!--android:clickable="true"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--android:layout_marginStart="8dp"-->
+                    <!--android:layout_width="36dp"-->
+                    <!--android:layout_height="36dp"-->
+                    <!--android:focusable="true" />-->
+
+                <!--<ImageView-->
+                    <!--android:background="@drawable/tool"-->
+                    <!--app:srcCompat="@drawable/ic_underline"-->
+                    <!--android:scaleType="center"-->
+                    <!--android:clickable="true"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--android:layout_marginStart="8dp"-->
+                    <!--android:layout_width="36dp"-->
+                    <!--android:layout_height="36dp"-->
+                    <!--android:focusable="true" />-->
+            <!--</LinearLayout>-->
+        <!--</HorizontalScrollView>-->
+
+    <!--</LinearLayout>-->
 
     <View
         android:layout_above="@id/bottom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
 
-    <TableLayout
-        android:id="@+id/bottom_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:gravity="center"
-        android:stretchColumns="1"
-        android:layout_alignParentLeft="true">
-
-        <TableRow
-            android:id="@+id/firstRow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:minHeight="50dp">
-
-            <ImageButton
-                android:id="@+id/script_play_button"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:background="?android:attr/selectableItemBackground"
-                app:srcCompat="@drawable/ic_play_arrow" />
-
-            <SeekBar
-                android:id="@+id/seekBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp" />
-        </TableRow>
-    </TableLayout>
-
+    <include layout="@layout/control_view" />
 </RelativeLayout>

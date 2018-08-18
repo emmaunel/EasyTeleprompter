@@ -32,9 +32,7 @@ public class ScriptsAdapter extends RecyclerView.Adapter<ScriptsViewHolder> {
                 .inflate(R.layout.script_item, null);
 
         ScriptsViewHolder holder = new ScriptsViewHolder(view);
-        view.setOnClickListener(v -> listener.onItemClick(holder.getAdapterPosition()));
-//        view.setOnLongClickListener();
-
+        view.setOnClickListener(v -> listener.onItemClick(scriptsList.get(i),holder.getAdapterPosition()));
         viewGroup = parent;
         return holder;
     }
@@ -122,5 +120,9 @@ public class ScriptsAdapter extends RecyclerView.Adapter<ScriptsViewHolder> {
     public void setScripts(List<Scripts> list) {
         scriptsList = list;
         notifyDataSetChanged();
+    }
+
+    public List<Scripts> getScriptsList() {
+        return scriptsList;
     }
 }

@@ -1,5 +1,6 @@
 package com.wordpress.ayo218.easy_teleprompter.database;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -15,8 +16,10 @@ import java.util.List;
 public interface ScriptDao {
 
     @Query("SELECT * FROM Scripts")
-    List<Scripts> loadAllScripts();
+    LiveData<List<Scripts>> loadAllScripts();
 
+    @Query("SELECT * FROM Scripts WHERE uid = :id")
+    LiveData<Scripts> loadScriptById(int id);
     @Insert
     void insertScript(Scripts scripts);
 
