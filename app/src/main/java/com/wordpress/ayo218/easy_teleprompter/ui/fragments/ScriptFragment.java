@@ -20,7 +20,7 @@ import com.wordpress.ayo218.easy_teleprompter.database.AppExecutors;
 import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.ScriptViewModel;
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
 import com.wordpress.ayo218.easy_teleprompter.ui.activities.EditScriptActivity;
-import com.wordpress.ayo218.easy_teleprompter.utils.GridSpacingItemDecoration;
+import com.wordpress.ayo218.easy_teleprompter.utils.animation.GridSpacingItemDecoration;
 
 import java.util.List;
 

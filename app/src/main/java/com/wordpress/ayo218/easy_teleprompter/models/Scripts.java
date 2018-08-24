@@ -16,6 +16,10 @@ public class Scripts implements Parcelable{
     private String content;
     private String date_created;
     private String date_updated;
+    private int scrollSpeed;
+    private int fontSize;
+    private int backgroundColor;
+    private int fontColor;
 
     @Ignore
     public Scripts() {
@@ -33,6 +37,19 @@ public class Scripts implements Parcelable{
         this.content = content;
         this.date_created = date_created;
         this.date_updated = date_updated;
+    }
+
+    @Ignore
+    public Scripts(String title, String content, String date_created, String date_updated,
+                   int scrollSpeed, int fontSize, int backgroundColor, int fontColor) {
+        this.title = title;
+        this.content = content;
+        this.date_created = date_created;
+        this.date_updated = date_updated;
+        this.scrollSpeed = scrollSpeed;
+        this.fontSize = fontSize;
+        this.backgroundColor = backgroundColor;
+        this.fontColor = fontColor;
     }
 
     public Scripts(int uid, String title, String content, String date_created, String date_updated) {
@@ -103,6 +120,38 @@ public class Scripts implements Parcelable{
         this.date_updated = date_updated;
     }
 
+    public int getScrollSpeed() {
+        return scrollSpeed;
+    }
+
+    public void setScrollSpeed(int scrollSpeed) {
+        this.scrollSpeed = scrollSpeed;
+    }
+
+    public int getFontSize() {
+        return fontSize;
+    }
+
+    public void setFontSize(int fontSize) {
+        this.fontSize = fontSize;
+    }
+
+    public int getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(int backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public int getFontColor() {
+        return fontColor;
+    }
+
+    public void setFontColor(int fontColor) {
+        this.fontColor = fontColor;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -115,5 +164,9 @@ public class Scripts implements Parcelable{
         dest.writeString(content);
         dest.writeString(date_created);
         dest.writeString(date_updated);
+        dest.writeInt(scrollSpeed);
+        dest.writeInt(fontSize);
+        dest.writeInt(backgroundColor);
+        dest.writeInt(fontColor);
     }
 }

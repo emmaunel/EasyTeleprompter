@@ -15,7 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.wordpress.ayo218.easy_teleprompter.utils.FabDialogMorphSetup;
+import com.wordpress.ayo218.easy_teleprompter.utils.animation.FabDialogMorphSetup;
 import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment;
 

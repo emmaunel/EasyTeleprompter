@@ -1,4 +1,4 @@
-package com.wordpress.ayo218.easy_teleprompter.utils;
+package com.wordpress.ayo218.easy_teleprompter.utils.animation;
 
 import android.annotation.TargetApi;
 import android.graphics.Canvas;
