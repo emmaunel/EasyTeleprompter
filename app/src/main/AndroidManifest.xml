@@ -19,11 +19,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.activities.EditScriptActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.activities.ScriptEditorDialog"
-            android:theme="@style/AppTheme.Dialog"></activity>
+        <activity
+            android:name=".ui.activities.ScriptEditorDialog"
+            android:theme="@style/AppTheme.Dialog" />
+
+        <activity android:name=".ScrollingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value=".ui.activities.EditScriptActivity"/>-->
+        </activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.wordpress.ayo218.easy_teleprompter.utils;
+package com.wordpress.ayo218.easy_teleprompter.utils.animation;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
 
-import static com.wordpress.ayo218.easy_teleprompter.utils.FabDialogMorphSetup.getFastOutLinearInInterpolator;
-import static com.wordpress.ayo218.easy_teleprompter.utils.FabDialogMorphSetup.getFastOutSlowInInterpolator;
+import static com.wordpress.ayo218.easy_teleprompter.utils.animation.FabDialogMorphSetup.getFastOutLinearInInterpolator;
+import static com.wordpress.ayo218.easy_teleprompter.utils.animation.FabDialogMorphSetup.getFastOutSlowInInterpolator;
 
 /**
  *  A transition that morphs a rectangle into a circle, changing it's background color.

@@ -50,6 +50,7 @@ dependencies {
 
     //Rich editor
     implementation 'jp.wasabeef:richeditor-android:1.2.2'
+
     //Debug database
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 

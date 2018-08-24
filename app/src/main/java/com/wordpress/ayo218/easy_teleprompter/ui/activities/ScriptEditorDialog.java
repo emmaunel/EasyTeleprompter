@@ -13,8 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
-import com.wordpress.ayo218.easy_teleprompter.utils.FabDialogMorphSetup;
-import com.wordpress.ayo218.easy_teleprompter.utils.TransitionHelper;
+import com.wordpress.ayo218.easy_teleprompter.utils.animation.FabDialogMorphSetup;
+import com.wordpress.ayo218.easy_teleprompter.utils.animation.TransitionHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

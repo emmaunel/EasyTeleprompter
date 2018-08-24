@@ -1,6 +1,5 @@
 package com.wordpress.ayo218.easy_teleprompter.ui.fragments;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -18,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
+import com.wordpress.ayo218.easy_teleprompter.ScrollingActivity;
 import com.wordpress.ayo218.easy_teleprompter.database.AppDatabase;
 import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewModel;
 import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewModelFactory;
@@ -31,6 +31,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.wordpress.ayo218.easy_teleprompter.TextScrollingFragment.SCRIPT_SCROLLING;
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment.UID;
 
 public class EditScriptFragment extends Fragment {
@@ -38,6 +39,7 @@ public class EditScriptFragment extends Fragment {
 
     public static final String DATE_EXTRA = "date_creation";
     private static final int DEFAULT_ID = -1;
+
     private int scriptId = DEFAULT_ID;
 
     @BindView(R.id.script_title_txt)
@@ -46,8 +48,6 @@ public class EditScriptFragment extends Fragment {
     EditText script_content;
     @BindView(R.id.script_play_button)
     ImageButton play_btn;
-    @BindView(R.id.script_modification_date)
-            TextView script_modification_date;
 
     TextView title_txt;
 
@@ -56,11 +56,13 @@ public class EditScriptFragment extends Fragment {
     String intent_title;
 
     private AppDatabase database;
-    private LiveData<Scripts> scripts;
+    private Scripts parceble;
 
     private EditScriptViewModelFactory factory;
     private EditScriptViewModel viewModel;
-    public EditScriptFragment() {}
+
+    public EditScriptFragment() {
+    }
 
     @Nullable
     @Override
@@ -72,7 +74,7 @@ public class EditScriptFragment extends Fragment {
 
         //Trying something new
         Intent intent = getActivity().getIntent();
-        if (intent != null && intent.hasExtra(UID)){
+        if (intent != null && intent.hasExtra(UID)) {
             if (scriptId == DEFAULT_ID) {
                 scriptId = intent.getIntExtra(UID, DEFAULT_ID);
                 factory = new EditScriptViewModelFactory(database, scriptId);
@@ -87,52 +89,72 @@ public class EditScriptFragment extends Fragment {
                 });
             }
         } else {
-            if (intent.hasExtra(Intent.EXTRA_TEXT)){
+            if (intent.hasExtra(Intent.EXTRA_TEXT)) {
                 intent_title = intent.getStringExtra(Intent.EXTRA_TEXT);
                 title_txt.setText(intent_title);
             }
 
             if (intent.hasExtra(DATE_EXTRA)) {
                 creationDate = intent.getStringExtra(DATE_EXTRA);
-                script_modification_date.setText("Created : " + creationDate);
             }
         }
 
 
         ImageView done_img = getActivity().findViewById(R.id.done_btn);
         done_img.setOnClickListener(v -> {
-            if (scriptId == DEFAULT_ID){
+            if (scriptId == DEFAULT_ID) {
                 title = intent_title;
-            }else{
+            } else {
                 viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
 
             }
 
-           content = script_content.getText().toString();
-           Scripts scripts = new Scripts(title, content, creationDate, updateDate);
+            content = script_content.getText().toString();
+            // TODO: 8/22/2018 Change this later 
+            Scripts scripts = new Scripts(title, content, creationDate, updateDate);
+
             if (scriptId == DEFAULT_ID) {
                 //Insert a new script
                 database.scriptDao().insertScript(scripts);
-            }else{
+            } else {
                 //update script
                 scripts.setUid(scriptId);
                 database.scriptDao().updateScript(scripts);
             }
             startActivity(new Intent(getContext(), MainActivity.class));
             getActivity().finish();
+
+
         });
 
+        //Open the Scrolling Activity
+        play_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (scriptId == DEFAULT_ID) {
+                    title = intent_title;
+                } else {
+                    viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
+                }
+
+                content = script_content.getText().toString();
+
+                Scripts scripts = new Scripts(title, content);
+                Intent intent = new Intent(getContext(), ScrollingActivity.class);
+                intent.putExtra(SCRIPT_SCROLLING, scripts);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
     private void populateUI(Scripts scripts) {
-        if (scripts == null){
+        if (scripts == null) {
             return;
         }
         title_txt.setText(scripts.getTitle());
         script_content.setText(scripts.getContent());
 
         updateDate = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
-        script_modification_date.setText("Last update: " + updateDate);
     }
 }
