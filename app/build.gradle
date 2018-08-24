@@ -43,7 +43,13 @@ dependencies {
     //Room database
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+    //ViewModel and LiveData
+    //the newer version isn't working
+    implementation 'android.arch.lifecycle:extensions:1.1.0'
+    annotationProcessor 'android.arch.lifecycle:compiler:1.1.0'
 
+    //Rich editor
+    implementation 'jp.wasabeef:richeditor-android:1.2.2'
     //Debug database
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 

@@ -51,6 +51,8 @@
             android:textColor="@color/immersive_bars"
             android:textSize="@dimen/small_text" />
 
+        <!--Change the imageview to radiobutton later-->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,6 +66,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:scaleType="center"
+                android:clickable="true"
                 android:src="@drawable/circle_dark" />
 
             <ImageView

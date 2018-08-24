@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
-import com.wordpress.ayo218.easy_teleprompter.ui.fragments.EditScriptFragment;
 import com.wordpress.ayo218.easy_teleprompter.utils.FabDialogMorphSetup;
 import com.wordpress.ayo218.easy_teleprompter.utils.TransitionHelper;
 
@@ -24,6 +23,8 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.EditScriptFragment.DATE_EXTRA;
 
 public class ScriptEditorDialog extends AppCompatActivity {
 
@@ -65,7 +66,7 @@ public class ScriptEditorDialog extends AppCompatActivity {
         Intent intent = new Intent(this, EditScriptActivity.class);
         intent.putExtra(EXTRA, SLIDE);
         intent.putExtra(Intent.EXTRA_TEXT, inputTitle);
-        intent.putExtra(EditScriptFragment.DATE_EXTRA, creationDate);
+        intent.putExtra(DATE_EXTRA, creationDate);
         Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, false);
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pairs);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

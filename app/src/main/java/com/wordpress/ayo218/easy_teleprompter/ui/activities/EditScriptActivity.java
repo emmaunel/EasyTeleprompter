@@ -40,8 +40,8 @@ public class EditScriptActivity extends AppCompatActivity{
         getWindow().setEnterTransition(transition);
 
         //set title
-        title = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-        title_txt.setText(title);
+//        title = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+//        title_txt.setText(title);
 
         //toolbar
         setSupportActionBar(toolbar);
