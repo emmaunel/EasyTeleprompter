@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "239273824246",
+    "firebase_url": "https://easyteleprompter.firebaseio.com",
+    "project_id": "easyteleprompter",
+    "storage_bucket": "easyteleprompter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239273824246:android:cafa233f11e7911a",
+        "android_client_info": {
+          "package_name": "com.wordpress.ayo218.easy_teleprompter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239273824246-j1h0edksq3tccpu2qbpipsmgqkclrlrb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wordpress.ayo218.easy_teleprompter",
+            "certificate_hash": "494873a92416aafbc0146c89046f5e9f22d014ba"
+          }
+        },
+        {
+          "client_id": "239273824246-vjlmlgj7tf882b50lkc93qpll94dq2ue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_psc99d-lDtXdQ0aC1aUMgwq7L3LGxxw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239273824246-vjlmlgj7tf882b50lkc93qpll94dq2ue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

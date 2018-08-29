@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
-import com.wordpress.ayo218.easy_teleprompter.ScrollingActivity;
+import com.wordpress.ayo218.easy_teleprompter.ui.activities.ScrollingActivity;
 import com.wordpress.ayo218.easy_teleprompter.database.AppDatabase;
 import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewModel;
 import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewModelFactory;
@@ -31,7 +30,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.wordpress.ayo218.easy_teleprompter.TextScrollingFragment.SCRIPT_SCROLLING;
+import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.TextScrollingFragment.SCRIPT_SCROLLING;
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment.UID;
 
 public class EditScriptFragment extends Fragment {
@@ -42,8 +41,8 @@ public class EditScriptFragment extends Fragment {
 
     private int scriptId = DEFAULT_ID;
 
-    @BindView(R.id.script_title_txt)
-    EditText script_title;
+//    @BindView(R.id.script_title_txt)
+//    EditText script_title;
     @BindView(R.id.script_content_txt)
     EditText script_content;
     @BindView(R.id.script_play_button)
@@ -56,7 +55,6 @@ public class EditScriptFragment extends Fragment {
     String intent_title;
 
     private AppDatabase database;
-    private Scripts parceble;
 
     private EditScriptViewModelFactory factory;
     private EditScriptViewModel viewModel;
@@ -83,7 +81,6 @@ public class EditScriptFragment extends Fragment {
                     @Override
                     public void onChanged(@Nullable Scripts script) {
                         viewModel.getScriptsLiveData().removeObserver(this);
-                        Log.d(TAG, "Receiving Data from database");
                         populateUI(script);
                     }
                 });
@@ -153,6 +150,7 @@ public class EditScriptFragment extends Fragment {
             return;
         }
         title_txt.setText(scripts.getTitle());
+//        script_title.setText(scripts.getTitle());
         script_content.setText(scripts.getContent());
 
         updateDate = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());

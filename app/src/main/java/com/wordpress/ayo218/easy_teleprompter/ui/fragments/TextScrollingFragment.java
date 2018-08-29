@@ -1,4 +1,4 @@
-package com.wordpress.ayo218.easy_teleprompter;
+package com.wordpress.ayo218.easy_teleprompter.ui.fragments;
 
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
@@ -21,6 +21,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
 import com.wordpress.ayo218.easy_teleprompter.ui.customViews.ScrollingScrollView;
 import com.wordpress.ayo218.easy_teleprompter.utils.listener.ScrollViewListerner;
