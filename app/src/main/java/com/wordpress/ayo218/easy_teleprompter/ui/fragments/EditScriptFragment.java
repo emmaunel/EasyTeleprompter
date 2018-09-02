@@ -1,12 +1,16 @@
 package com.wordpress.ayo218.easy_teleprompter.ui.fragments;
 
+import android.Manifest;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.ui.activities.ScrollingActivity;
@@ -41,12 +46,16 @@ public class EditScriptFragment extends Fragment {
 
     private int scriptId = DEFAULT_ID;
 
-//    @BindView(R.id.script_title_txt)
+    private int CAMERA_PERMISSION = 1;
+
+    //    @BindView(R.id.script_title_txt)
 //    EditText script_title;
     @BindView(R.id.script_content_txt)
     EditText script_content;
     @BindView(R.id.script_play_button)
     ImageButton play_btn;
+    @BindView(R.id.record_script_button)
+    ImageButton record_btn;
 
     TextView title_txt;
 
@@ -142,8 +151,18 @@ public class EditScriptFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        //checking permission
+        record_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ScrollingActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
+
 
     private void populateUI(Scripts scripts) {
         if (scripts == null) {
