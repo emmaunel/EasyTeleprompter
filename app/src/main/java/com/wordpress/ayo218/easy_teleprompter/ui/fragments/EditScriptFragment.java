@@ -157,6 +157,7 @@ public class EditScriptFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ScrollingActivity.class);
+                intent.putExtra("fragments", "HI");
                 startActivity(intent);
             }
         });

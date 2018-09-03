@@ -103,6 +103,11 @@ public class TextScrollingFragment extends Fragment
             scripts = intent.getParcelableExtra(SCRIPT_SCROLLING);
         }
 
+        // FIXME: 9/2/18 Need help here
+        if (intent.getStringExtra("fragments") != null) {
+            getActivity().getWindow().setBackgroundDrawableResource(R.color.blue);
+        }
+
         if (scripts != null) {
             content_txt.setText(scripts.getContent());
             setAnimationSpeed(3);

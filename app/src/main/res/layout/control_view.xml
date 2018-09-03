@@ -29,7 +29,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="64dp"
         android:background="?android:attr/selectableItemBackground"
-        app:srcCompat="@drawable/ic_settings"
+        app:srcCompat="@drawable/ic_recording"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="64dp" />
 

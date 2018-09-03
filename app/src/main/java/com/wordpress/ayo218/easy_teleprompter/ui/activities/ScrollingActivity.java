@@ -1,5 +1,6 @@
 package com.wordpress.ayo218.easy_teleprompter.ui.activities;
 
+import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -19,21 +20,36 @@ public class ScrollingActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
-        initFragment();
+
+        Intent intent = getIntent();
+        if (intent.getStringExtra("fragments") != null){
+            Log.e(TAG, "onCreate: Camera and scrolling" );
+            initCameraFragment();
+        } else{
+            Log.e(TAG, "onCreate: Just scrolling");
+            initScrollingFragment();
+        }
 
     }
 
-//    private void initFragment(){
-//        CameraFragment fragment = new CameraFragment();
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.camera_fragment, fragment);
-//        transaction.commit();
-//    }
+    private void initScrollingFragment(){
+        TextScrollingFragment fragment = new TextScrollingFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.camera_fragment, fragment);
+        transaction.commit();
+    }
 
-    private void initFragment(){
+    // FIXME: 9/2/18 Need help
+    private void initCameraFragment(){
             getFragmentManager().beginTransaction()
                     .replace(R.id.camera_fragment, CameraFragment.newInstance())
                     .commit();
+
+        TextScrollingFragment fragment = new TextScrollingFragment();
+//        fragment.getActivity().getWindow().setBackgroundDrawableResource(R.color.blue);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.camera_fragment, fragment);
+        transaction.commit();
 
     }
 }
