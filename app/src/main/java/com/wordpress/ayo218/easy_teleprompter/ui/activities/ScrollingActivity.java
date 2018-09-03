@@ -15,6 +15,7 @@ import com.wordpress.ayo218.easy_teleprompter.ui.fragments.TextScrollingFragment
 public class ScrollingActivity extends AppCompatActivity{
 
     private static final String TAG = "ScrollingActivity";
+    public static final String DOUBLE_FRAGMENT = "fragments";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class ScrollingActivity extends AppCompatActivity{
         setContentView(R.layout.activity_scrolling);
 
         Intent intent = getIntent();
-        if (intent.getStringExtra("fragments") != null){
+        if (intent.getStringExtra(DOUBLE_FRAGMENT) != null){
             Log.e(TAG, "onCreate: Camera and scrolling" );
             initCameraFragment();
         } else{
@@ -39,7 +40,6 @@ public class ScrollingActivity extends AppCompatActivity{
         transaction.commit();
     }
 
-    // FIXME: 9/2/18 Need help
     private void initCameraFragment(){
             getFragmentManager().beginTransaction()
                     .replace(R.id.camera_fragment, CameraFragment.newInstance())

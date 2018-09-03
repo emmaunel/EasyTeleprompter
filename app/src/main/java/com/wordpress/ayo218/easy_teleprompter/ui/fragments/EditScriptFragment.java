@@ -35,6 +35,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.wordpress.ayo218.easy_teleprompter.ui.activities.ScrollingActivity.DOUBLE_FRAGMENT;
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.TextScrollingFragment.SCRIPT_SCROLLING;
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment.UID;
 
@@ -133,7 +134,7 @@ public class EditScriptFragment extends Fragment {
 
         });
 
-        //Open the Scrolling Activity
+        //Open the text_scrolling fragment
         play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,12 +153,22 @@ public class EditScriptFragment extends Fragment {
             }
         });
 
-        //checking permission
+        //Open camera and text_scrolling fragments
         record_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (scriptId == DEFAULT_ID) {
+                    title = intent_title;
+                } else {
+                    viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
+                }
+
+                content = script_content.getText().toString();
+
+                Scripts scripts = new Scripts(title, content);
                 Intent intent = new Intent(getContext(), ScrollingActivity.class);
-                intent.putExtra("fragments", "HI");
+                intent.putExtra(DOUBLE_FRAGMENT, true);
+                intent.putExtra(SCRIPT_SCROLLING, scripts);
                 startActivity(intent);
             }
         });
