@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -105,7 +106,8 @@ public class TextScrollingFragment extends Fragment
 
         // FIXME: 9/2/18 Need help here
         if (intent.getStringExtra("fragments") != null) {
-            getActivity().getWindow().setBackgroundDrawableResource(R.color.blue);
+//            getActivity().getWindow().setBackgroundDrawableResource(R.color.blue);
+            Log.e(TAG, "onCreateView: Alive");
         }
 
         if (scripts != null) {

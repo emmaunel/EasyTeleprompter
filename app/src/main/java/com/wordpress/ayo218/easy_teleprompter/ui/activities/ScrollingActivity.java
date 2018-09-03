@@ -35,7 +35,7 @@ public class ScrollingActivity extends AppCompatActivity{
     private void initScrollingFragment(){
         TextScrollingFragment fragment = new TextScrollingFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.camera_fragment, fragment);
+        transaction.replace(R.id.text_scrolling_fragment, fragment);
         transaction.commit();
     }
 
@@ -46,9 +46,8 @@ public class ScrollingActivity extends AppCompatActivity{
                     .commit();
 
         TextScrollingFragment fragment = new TextScrollingFragment();
-//        fragment.getActivity().getWindow().setBackgroundDrawableResource(R.color.blue);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.camera_fragment, fragment);
+        transaction.replace(R.id.text_scrolling_fragment, fragment);
         transaction.commit();
 
     }

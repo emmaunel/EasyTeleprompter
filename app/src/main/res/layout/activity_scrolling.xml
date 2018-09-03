@@ -8,12 +8,13 @@
     tools:context=".ui.activities.ScrollingActivity">
 
     <FrameLayout
-        android:id="@+id/text_scrolling_fragment"
+        android:id="@+id/camera_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <FrameLayout
-        android:id="@+id/camera_fragment"
+        android:id="@+id/text_scrolling_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </RelativeLayout>
