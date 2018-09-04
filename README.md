@@ -1,1 +1,1 @@
-<h2>Easy Teleprompter</h2>
+<h2>Promptr</h2>
