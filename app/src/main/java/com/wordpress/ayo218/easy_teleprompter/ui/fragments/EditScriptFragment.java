@@ -167,7 +167,7 @@ public class EditScriptFragment extends Fragment {
 
                 Scripts scripts = new Scripts(title, content);
                 Intent intent = new Intent(getContext(), ScrollingActivity.class);
-                intent.putExtra(DOUBLE_FRAGMENT, true);
+                intent.putExtra(DOUBLE_FRAGMENT, "Hi");
                 intent.putExtra(SCRIPT_SCROLLING, scripts);
                 startActivity(intent);
             }
