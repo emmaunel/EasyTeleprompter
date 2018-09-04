@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wordpress.ayo218.easy_teleprompter">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,12 +31,10 @@
             android:name=".ui.activities.ScriptEditorDialog"
             android:theme="@style/AppTheme.Dialog" />
 
-        <activity android:name=".ScrollingActivity"
+        <activity android:name=".ui.activities.ScrollingActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value=".ui.activities.EditScriptActivity"/>-->
+
         </activity>
     </application>
 

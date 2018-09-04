@@ -1,13 +1,16 @@
 package com.wordpress.ayo218.easy_teleprompter.ui.fragments;
 
+import android.Manifest;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +18,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
-import com.wordpress.ayo218.easy_teleprompter.ScrollingActivity;
+import com.wordpress.ayo218.easy_teleprompter.ui.activities.ScrollingActivity;
 import com.wordpress.ayo218.easy_teleprompter.database.AppDatabase;
 import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewModel;
 import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewModelFactory;
@@ -31,7 +35,8 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.wordpress.ayo218.easy_teleprompter.TextScrollingFragment.SCRIPT_SCROLLING;
+import static com.wordpress.ayo218.easy_teleprompter.ui.activities.ScrollingActivity.DOUBLE_FRAGMENT;
+import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.TextScrollingFragment.SCRIPT_SCROLLING;
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment.UID;
 
 public class EditScriptFragment extends Fragment {
@@ -42,12 +47,16 @@ public class EditScriptFragment extends Fragment {
 
     private int scriptId = DEFAULT_ID;
 
-    @BindView(R.id.script_title_txt)
-    EditText script_title;
+    private int CAMERA_PERMISSION = 1;
+
+    //    @BindView(R.id.script_title_txt)
+//    EditText script_title;
     @BindView(R.id.script_content_txt)
     EditText script_content;
     @BindView(R.id.script_play_button)
     ImageButton play_btn;
+    @BindView(R.id.record_script_button)
+    ImageButton record_btn;
 
     TextView title_txt;
 
@@ -56,7 +65,6 @@ public class EditScriptFragment extends Fragment {
     String intent_title;
 
     private AppDatabase database;
-    private Scripts parceble;
 
     private EditScriptViewModelFactory factory;
     private EditScriptViewModel viewModel;
@@ -83,7 +91,6 @@ public class EditScriptFragment extends Fragment {
                     @Override
                     public void onChanged(@Nullable Scripts script) {
                         viewModel.getScriptsLiveData().removeObserver(this);
-                        Log.d(TAG, "Receiving Data from database");
                         populateUI(script);
                     }
                 });
@@ -127,7 +134,7 @@ public class EditScriptFragment extends Fragment {
 
         });
 
-        //Open the Scrolling Activity
+        //Open the text_scrolling fragment
         play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,14 +152,36 @@ public class EditScriptFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        //Open camera and text_scrolling fragments
+        record_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (scriptId == DEFAULT_ID) {
+                    title = intent_title;
+                } else {
+                    viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
+                }
+
+                content = script_content.getText().toString();
+
+                Scripts scripts = new Scripts(title, content);
+                Intent intent = new Intent(getContext(), ScrollingActivity.class);
+                intent.putExtra(DOUBLE_FRAGMENT, "Hi");
+                intent.putExtra(SCRIPT_SCROLLING, scripts);
+                startActivity(intent);
+            }
+        });
         return view;
     }
+
 
     private void populateUI(Scripts scripts) {
         if (scripts == null) {
             return;
         }
         title_txt.setText(scripts.getTitle());
+//        script_title.setText(scripts.getTitle());
         script_content.setText(scripts.getContent());
 
         updateDate = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());

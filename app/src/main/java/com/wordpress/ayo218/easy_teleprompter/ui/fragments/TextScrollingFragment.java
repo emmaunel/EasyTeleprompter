@@ -1,4 +1,4 @@
-package com.wordpress.ayo218.easy_teleprompter;
+package com.wordpress.ayo218.easy_teleprompter.ui.fragments;
 
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -21,6 +22,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
 import com.wordpress.ayo218.easy_teleprompter.ui.customViews.ScrollingScrollView;
 import com.wordpress.ayo218.easy_teleprompter.utils.listener.ScrollViewListerner;
@@ -101,6 +103,7 @@ public class TextScrollingFragment extends Fragment
         if (intent != null && intent.hasExtra(SCRIPT_SCROLLING)) {
             scripts = intent.getParcelableExtra(SCRIPT_SCROLLING);
         }
+
 
         if (scripts != null) {
             content_txt.setText(scripts.getContent());
