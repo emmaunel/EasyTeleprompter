@@ -44,10 +44,7 @@ public class EditScriptFragment extends Fragment {
 
     public static final String DATE_EXTRA = "date_creation";
     private static final int DEFAULT_ID = -1;
-
     private int scriptId = DEFAULT_ID;
-
-    private int CAMERA_PERMISSION = 1;
 
     //    @BindView(R.id.script_title_txt)
 //    EditText script_title;
@@ -60,7 +57,13 @@ public class EditScriptFragment extends Fragment {
 
     TextView title_txt;
 
-    String creationDate, title, content, updateDate;
+    private String creationDate, title, content, updateDate;
+    private int textColor;
+    private int backgroundColor;
+    private int scrollSpeed;
+    private int fontSize;
+    private boolean textMirroed;
+
     //title from new script
     String intent_title;
 
@@ -68,6 +71,13 @@ public class EditScriptFragment extends Fragment {
 
     private EditScriptViewModelFactory factory;
     private EditScriptViewModel viewModel;
+
+    //SavedInstanceState Constant
+    private static final String SAVED_TEXT_COLOR = "text_color";
+    private static final String SAVED_BACKGROUD_COLOR = "text_color";
+//    private static final String SAVED_TEXT = "text_color";
+//    private static final String SAVED_TEXT_COLOR = "text_color";
+//    private static final String SAVED_TEXT_COLOR = "text_color";
 
     public EditScriptFragment() {
     }
@@ -79,6 +89,8 @@ public class EditScriptFragment extends Fragment {
         ButterKnife.bind(this, view);
         database = AppDatabase.getsInstance(getContext());
         title_txt = getActivity().findViewById(R.id.script_title);
+
+
 
         //Trying something new
         Intent intent = getActivity().getIntent();
@@ -167,7 +179,7 @@ public class EditScriptFragment extends Fragment {
 
                 Scripts scripts = new Scripts(title, content);
                 Intent intent = new Intent(getContext(), ScrollingActivity.class);
-                intent.putExtra(DOUBLE_FRAGMENT, "Hi");
+                intent.putExtra(DOUBLE_FRAGMENT, "hi");
                 intent.putExtra(SCRIPT_SCROLLING, scripts);
                 startActivity(intent);
             }

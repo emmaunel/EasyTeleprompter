@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -11,12 +16,28 @@
                   <entry key="vectorAssetStep">
                     <value>
                       <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="clipartAsset">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="url" value="jar:file:/private/var/folders/t4/lqt4k03d1qv70gz41cmx_0bh0000gn/T/AppTranslocation/24DCA465-3591-4731-80A3-1A025DF9E0DB/d/Android%20Studio%203.3%20Preview.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_settings_black_24dp.xml" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="autoMirrored" value="true" />
-                            <entry key="outputName" value="ic_recording" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/recording.svg" />
+                            <entry key="color" value="545353" />
+                            <entry key="outputName" value="ic_logout" />
+                            <entry key="sourceFile" value="$USER_HOME$/Downloads/logout.svg" />
                           </map>
                         </option>
                       </PersistentState>
