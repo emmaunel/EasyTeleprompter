@@ -58,6 +58,14 @@ dependencies {
     //pref
     implementation 'com.android.support:preference-v7:27.1.1'
 
+    //Color picker
+    implementation 'petrov.kristiyan:colorpicker-library:1.1.8'
+
+    //Camera
+    implementation 'com.github.duanhong169:camera:1.0.3'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -49,4 +49,5 @@
     <string name="speed_label_values_4">4</string>
     <string name="speed_label_values_5">5</string>
     <string name="speed_title">Scroll Speed</string>
+    <string name="color_theme">color_theme</string>
 </resources>

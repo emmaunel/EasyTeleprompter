@@ -21,4 +21,5 @@
         android:entryValues="@array/speed_labels_values"
         android:key="@string/speed_key"
         android:title="@string/speed_title"/>
+
 </PreferenceScreen>

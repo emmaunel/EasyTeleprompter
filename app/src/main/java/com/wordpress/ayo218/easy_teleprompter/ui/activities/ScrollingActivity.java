@@ -1,12 +1,10 @@
 package com.wordpress.ayo218.easy_teleprompter.ui.activities;
 
 import android.content.Intent;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.FrameLayout;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.ui.fragments.CameraFragment;

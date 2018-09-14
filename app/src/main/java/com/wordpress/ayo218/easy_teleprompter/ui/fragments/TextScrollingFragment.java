@@ -102,6 +102,7 @@ public class TextScrollingFragment extends Fragment
         Intent intent = getActivity().getIntent();
         if (intent != null && intent.hasExtra(SCRIPT_SCROLLING)) {
             scripts = intent.getParcelableExtra(SCRIPT_SCROLLING);
+            Log.i(TAG, "onCreateView: Scroll Speed " + scripts.getScrollSpeed());
         }
 
 

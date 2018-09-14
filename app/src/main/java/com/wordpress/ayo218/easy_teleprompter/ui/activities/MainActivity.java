@@ -1,7 +1,12 @@
 package com.wordpress.ayo218.easy_teleprompter.ui.activities;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -14,7 +19,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.jakewharton.rxbinding2.view.RxView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.wordpress.ayo218.easy_teleprompter.utils.animation.FabDialogMorphSetup;
 import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment;
@@ -34,6 +42,8 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
+
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +64,18 @@ public class MainActivity extends AppCompatActivity
         initFragment();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions.request(Manifest.permission.CAMERA,
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(granted -> {
+                    if (granted) {
+                        Toast.makeText(this, "granted", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Not granted", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 

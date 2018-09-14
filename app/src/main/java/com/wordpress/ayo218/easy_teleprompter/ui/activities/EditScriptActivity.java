@@ -67,6 +67,8 @@ public class EditScriptActivity extends AppCompatActivity{
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(EditScriptActivity.this, MainActivity.class));
+
+
         finish();
     }
 
