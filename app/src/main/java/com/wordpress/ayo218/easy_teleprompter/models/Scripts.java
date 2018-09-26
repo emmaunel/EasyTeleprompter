@@ -9,6 +9,7 @@ import android.os.Parcelable;
 @Entity(tableName = "Scripts")
 public class Scripts implements Parcelable{
 
+    // TODO: 9/6/18 Remove date_created because firebase will handle that 
     @PrimaryKey(autoGenerate = true)
     private int uid;
 
@@ -42,6 +43,18 @@ public class Scripts implements Parcelable{
     @Ignore
     public Scripts(String title, String content, String date_created, String date_updated,
                    int scrollSpeed, int fontSize, int backgroundColor, int fontColor) {
+        this.title = title;
+        this.content = content;
+        this.date_created = date_created;
+        this.date_updated = date_updated;
+        this.scrollSpeed = scrollSpeed;
+        this.fontSize = fontSize;
+        this.backgroundColor = backgroundColor;
+        this.fontColor = fontColor;
+    }
+
+    @Ignore
+    public Scripts(String title, String content, int scrollSpeed, int fontSize, int backgroundColor, int fontColor) {
         this.title = title;
         this.content = content;
         this.date_created = date_created;

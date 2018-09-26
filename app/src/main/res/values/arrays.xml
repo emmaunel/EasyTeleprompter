@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="font_size">
+        <item>@string/font_size_small</item>
+        <item>@string/font_size_medium</item>
+        <item>@string/font_size_large</item>
+        <item>@string/font_size_xlarge</item>
+    </array>
+
+    <array name="font_size_values">
+        <item>@string/font_size_small_values</item>
+        <item>@string/font_size_medium_values</item>
+        <item>@string/font_size_large_values</item>
+        <item>@string/font_size_xlarge_values</item>
+    </array>
+
+    <array name="speed_labels">
+        <item>@string/speed_label_1</item>
+        <item>@string/speed_label_2</item>
+        <item>@string/speed_label_3</item>
+        <item>@string/speed_label_4</item>
+        <item>@string/speed_label_5</item>
+    </array>
+
+    <array name="speed_labels_values">
+        <item>@string/speed_label_values_1</item>
+        <item>@string/speed_label_values_2</item>
+        <item>@string/speed_label_values_3</item>
+        <item>@string/speed_label_values_4</item>
+        <item>@string/speed_label_values_5</item>
+    </array>
+
+</resources>
