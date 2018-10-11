@@ -50,4 +50,9 @@
     <string name="speed_label_values_5">5</string>
     <string name="speed_title">Scroll Speed</string>
     <string name="color_theme">color_theme</string>
+    <string name="play_button">play_button</string>
+    <string name="edit_script">edit_script</string>
+    <string name="countdown_number">5</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
 </resources>

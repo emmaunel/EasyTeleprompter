@@ -10,7 +10,7 @@ import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.ui.fragments.CameraFragment;
 import com.wordpress.ayo218.easy_teleprompter.ui.fragments.TextScrollingFragment;
 
-public class ScrollingActivity extends AppCompatActivity{
+public class ScrollingActivity extends AppCompatActivity implements TextScrollingFragment.OnPauseListener{
 
     private static final String TAG = "ScrollingActivity";
     public static final String DOUBLE_FRAGMENT = "fragments";
@@ -21,32 +21,36 @@ public class ScrollingActivity extends AppCompatActivity{
         setContentView(R.layout.activity_scrolling);
 
         Intent intent = getIntent();
-        if (intent.getStringExtra(DOUBLE_FRAGMENT) != null){
-            Log.e(TAG, "onCreate: Camera and scrolling" );
+        if (intent.getStringExtra(DOUBLE_FRAGMENT) != null) {
+            Log.e(TAG, "onCreate: Camera and scrolling");
             initCameraFragment();
-        } else{
+        } else {
             Log.e(TAG, "onCreate: Just scrolling");
             initScrollingFragment();
         }
 
     }
 
-    private void initScrollingFragment(){
-        TextScrollingFragment fragment = new TextScrollingFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.text_scrolling_fragment, fragment);
-        transaction.commit();
+    private void initScrollingFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.text_scrolling_fragment, TextScrollingFragment.newInstance())
+                .commit();
     }
 
-    private void initCameraFragment(){
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.camera_fragment, CameraFragment.newInstance())
-                    .commit();
+    private void initCameraFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.camera_fragment, CameraFragment.newInstance())
+                .commit();
 
-        TextScrollingFragment fragment = new TextScrollingFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.text_scrolling_fragment, fragment);
-        transaction.commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.text_scrolling_fragment, TextScrollingFragment.newInstance())
+                .commit();
 
+    }
+
+    @Override
+    public void onClicked(boolean clicked) {
+        // FIXME: 9/27/18 Trying to control viedo record with record button from textdcrolling
+        Log.e(TAG, "onClicked: " + clicked);
     }
 }

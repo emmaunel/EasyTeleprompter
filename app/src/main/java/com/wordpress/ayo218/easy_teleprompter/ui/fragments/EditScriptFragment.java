@@ -43,6 +43,7 @@ import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewM
 import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewModelFactory;
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
 import com.wordpress.ayo218.easy_teleprompter.ui.activities.MainActivity;
+import com.wordpress.ayo218.easy_teleprompter.ui.fragments.template.BaseFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ import static com.wordpress.ayo218.easy_teleprompter.ui.activities.ScrollingActi
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.TextScrollingFragment.SCRIPT_SCROLLING;
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment.UID;
 
-public class EditScriptFragment extends Fragment{
+public class EditScriptFragment extends BaseFragment {
     private static final String TAG = "EditScriptFragment";
 
     public static final String DATE_EXTRA = "date_creation";
@@ -95,9 +96,11 @@ public class EditScriptFragment extends Fragment{
     private EditScriptViewModel viewModel;
 
     //SavedInstanceState Constant
+    private static final String BUNDLE_SCRIPT_CONTENT = "content";
 
     public EditScriptFragment() {
     }
+
 
     @SuppressLint("CheckResult")
     @Nullable
@@ -105,6 +108,12 @@ public class EditScriptFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_script, container, false);
         ButterKnife.bind(this, view);
+
+        if (savedInstanceState != null){
+            String saved_con = savedInstanceState.getString(BUNDLE_SCRIPT_CONTENT);
+            Log.i(TAG, "onCreateView: " + saved_con);
+        }
+
         database = AppDatabase.getsInstance(getContext());
         title_txt = getActivity().findViewById(R.id.script_title);
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
@@ -136,32 +145,32 @@ public class EditScriptFragment extends Fragment{
         }
 
 
-        ImageView done_img = getActivity().findViewById(R.id.done_btn);
-        done_img.setOnClickListener(v -> {
-            if (scriptId == DEFAULT_ID) {
-                title = intent_title;
-            } else {
-                viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
-
-            }
-
-            content = script_content.getText().toString();
-            // TODO: 8/22/2018 Change this later 
-            Scripts scripts = new Scripts(title, content, creationDate, updateDate);
-
-            if (scriptId == DEFAULT_ID) {
-                //Insert a new script
-                database.scriptDao().insertScript(scripts);
-            } else {
-                //update script
-                scripts.setUid(scriptId);
-                database.scriptDao().updateScript(scripts);
-            }
-            startActivity(new Intent(getContext(), MainActivity.class));
-            getActivity().finish();
-
-
-        });
+//        ImageView done_img = getActivity().findViewById(R.id.done_btn);
+//        done_img.setOnClickListener(v -> {
+//            if (scriptId == DEFAULT_ID) {
+//                title = intent_title;
+//            } else {
+//                viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
+//
+//            }
+//
+//            content = script_content.getText().toString();
+//            // TODO: 8/22/2018 Change this later
+//            Scripts scripts = new Scripts(title, content, creationDate, updateDate);
+//
+//            if (scriptId == DEFAULT_ID) {
+//                //Insert a new script
+//                database.scriptDao().insertScript(scripts);
+//            } else {
+//                //update script
+//                scripts.setUid(scriptId);
+//                database.scriptDao().updateScript(scripts);
+//            }
+//            startActivity(new Intent(getContext(), MainActivity.class));
+//            getActivity().finish();
+//
+//
+//        });
 
 
         //Open the text_scrolling fragment
@@ -176,7 +185,8 @@ public class EditScriptFragment extends Fragment{
 
                 content = script_content.getText().toString();
 
-                Scripts scripts = new Scripts(title, content);
+                // FIXME: 9/17/18 Also was here
+                Scripts scripts = new Scripts(title, content, 1, 2, android.R.color.holo_blue_dark, R.color.white);
                 Intent intent = new Intent(getContext(), ScrollingActivity.class);
                 intent.putExtra(SCRIPT_SCROLLING, scripts);
                 startActivity(intent);
@@ -270,5 +280,58 @@ public class EditScriptFragment extends Fragment{
     }
 
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String saved_cont = script_content.getText().toString();
+        outState.putString(BUNDLE_SCRIPT_CONTENT, saved_cont);
+    }
 
+//    @Override
+//    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+//        super.onViewStateRestored(savedInstanceState);
+//        if (savedInstanceState == null) {
+//            Log.e(TAG, "onViewStateRestored: NULLLLLL" );
+//        }else{
+//            String saved = savedInstanceState.getString(BUNDLE_SCRIPT_CONTENT);
+//            Log.i(TAG, "onViewStateRestored: " + saved);
+//            script_content.setText(saved);
+//        }
+//    }
+
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        String saved_cont = script_content.getText().toString();
+        Log.i(TAG, "onViewStateRestored: " + saved_cont);
+        script_content.setText(saved_cont);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (scriptId == DEFAULT_ID) {
+            title = intent_title;
+        } else {
+            viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
+
+        }
+
+        content = script_content.getText().toString();
+        // TODO: 8/22/2018 Change this later
+        Scripts scripts = new Scripts(title, content, creationDate, updateDate);
+
+        if (scriptId == DEFAULT_ID) {
+            //Insert a new script
+            database.scriptDao().insertScript(scripts);
+        } else {
+            //update script
+            scripts.setUid(scriptId);
+            database.scriptDao().updateScript(scripts);
+        }
+        startActivity(new Intent(getContext(), MainActivity.class));
+        getActivity().finish();
+    }
 }

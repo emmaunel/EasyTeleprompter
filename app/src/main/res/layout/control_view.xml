@@ -19,7 +19,8 @@
         android:layout_alignParentTop="true"
         android:background="?android:attr/selectableItemBackground"
         app:srcCompat="@drawable/ic_play_arrow"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/play_button"/>
 
     <ImageButton
         android:id="@+id/record_script_button"
@@ -31,7 +32,8 @@
         android:background="?android:attr/selectableItemBackground"
         app:srcCompat="@drawable/ic_recording"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="64dp" />
+        android:layout_marginLeft="64dp"
+        android:contentDescription="@string/record"/>
 
     <android.support.v7.widget.AppCompatSeekBar
         android:id="@+id/script_speed_seekbar"
@@ -40,7 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="124dp" />
+        android:layout_marginStart="124dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="124dp" />
 
     <ImageButton
         android:id="@+id/settings_script_button"
@@ -49,28 +53,10 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="8dp"
         android:background="?android:attr/selectableItemBackground"
-        app:srcCompat="@drawable/ic_settings" />
-        <!--<TextView-->
-            <!--android:id="@+id/script_modification_date"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:textAlignment="center"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_marginStart="10dp"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:textAllCaps="false"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:background="?android:attr/selectableItemBackground"-->
-            <!--android:text="@string/last_modification_date"/>-->
-
-        <!--<ImageButton-->
-            <!--android:id="@+id/script_action_more"-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:background="?android:attr/selectableItemBackground"-->
-            <!--android:src="@drawable/ic_icon_three_dot"-->
-            <!--android:contentDescription="@string/script_actions"/>-->
+        app:srcCompat="@drawable/ic_settings"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/edit_script"/>
 
 </RelativeLayout>
 
