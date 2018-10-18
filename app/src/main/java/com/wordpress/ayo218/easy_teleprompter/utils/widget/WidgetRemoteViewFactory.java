@@ -3,13 +3,11 @@ package com.wordpress.ayo218.easy_teleprompter.utils.widget;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.database.AppDatabase;
-import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.ScriptViewModel;
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
 
 import java.util.List;
@@ -32,7 +30,6 @@ public class WidgetRemoteViewFactory implements RemoteViewsService.RemoteViewsFa
     public void onCreate() {
         AppDatabase database = AppDatabase.getsInstance(context);
         scripts = database.scriptDao().loadScripts();
-        Log.e(TAG, "Widget Here " + scripts.get(0).getTitle());
     }
 
     @Override
