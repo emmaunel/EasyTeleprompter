@@ -55,4 +55,8 @@
     <string name="countdown_number">5</string>
     <string name="play">Play</string>
     <string name="pause">Pause</string>
+    <string name="appwidget_text">Script name</string>
+    <string name="add_widget">Add widget</string>
+    <string name="granted">Granted</string>
+    <string name="not_granted">Not granted</string>
 </resources>

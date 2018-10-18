@@ -98,6 +98,8 @@ public class EditScriptFragment extends BaseFragment {
     //SavedInstanceState Constant
     private static final String BUNDLE_SCRIPT_CONTENT = "content";
 
+    String saved_cont;
+
     public EditScriptFragment() {
     }
 
@@ -287,7 +289,8 @@ public class EditScriptFragment extends BaseFragment {
         outState.putString(BUNDLE_SCRIPT_CONTENT, saved_cont);
     }
 
-//    @Override
+
+    //    @Override
 //    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
 //        super.onViewStateRestored(savedInstanceState);
 //        if (savedInstanceState == null) {

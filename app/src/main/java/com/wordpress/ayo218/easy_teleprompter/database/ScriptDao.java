@@ -18,6 +18,9 @@ public interface ScriptDao {
     @Query("SELECT * FROM Scripts")
     LiveData<List<Scripts>> loadAllScripts();
 
+    @Query("SELECT * FROM Scripts")
+    List<Scripts> loadScripts();
+
     @Query("SELECT * FROM Scripts WHERE uid = :id")
     LiveData<Scripts> loadScriptById(int id);
     @Insert

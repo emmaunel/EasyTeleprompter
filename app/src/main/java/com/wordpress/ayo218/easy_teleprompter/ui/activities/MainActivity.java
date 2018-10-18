@@ -76,10 +76,10 @@ public class MainActivity extends AppCompatActivity
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(granted -> {
                     if (granted) {
-                        Toast.makeText(this, "granted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.granted, Toast.LENGTH_SHORT).show();
                         Log.i(TAG, "File Directory: " + Constants.MEDIA_DIR);
                     } else {
-                        Toast.makeText(this, "Not granted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.not_granted, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
         transaction.commit();
     }
 
-    @SuppressLint("NewApi")
+    @SuppressLint({"NewApi", "RestrictedApi"})
     @OnClick(R.id.fab)
     protected void fabClick(){
         Intent intent = new Intent(this, ScriptEditorDialog.class);

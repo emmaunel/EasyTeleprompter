@@ -67,7 +67,10 @@ public class ScriptEditorDialog extends AppCompatActivity {
         intent.putExtra(EXTRA, SLIDE);
         intent.putExtra(Intent.EXTRA_TEXT, inputTitle);
         intent.putExtra(DATE_EXTRA, creationDate);
-        Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(this, false);
+        Pair<View, String>[] pairs = new Pair[0];
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            pairs = TransitionHelper.createSafeTransitionParticipants(this, false);
+        }
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pairs);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             startActivity(intent, optionsCompat.toBundle());
