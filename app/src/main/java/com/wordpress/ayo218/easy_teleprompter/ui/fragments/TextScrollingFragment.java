@@ -8,11 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -87,10 +85,6 @@ public class TextScrollingFragment extends BaseFragment
 
     private Scripts scripts = null;
 
-    public static TextScrollingFragment newInstance() {
-        return new TextScrollingFragment();
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
@@ -110,16 +104,13 @@ public class TextScrollingFragment extends BaseFragment
         Intent intent = getActivity().getIntent();
         if (intent != null && intent.hasExtra(SCRIPT_SCROLLING)) {
             scripts = intent.getParcelableExtra(SCRIPT_SCROLLING);
-            Log.i(TAG, "onCreateView: Scroll Speed " + scripts.getScrollSpeed());
         }
 
 
         if (scripts != null) {
             content_txt.setText(scripts.getContent());
             // FIXME: 9/17/18 I was here
-            content_txt.setTextColor(scripts.getFontColor());
-            scrollingScrollView.setBackgroundColor(scripts.getBackgroundColor());
-            setAnimationSpeed(scripts.getScrollSpeed());
+            setAnimationSpeed(3);
 
         }
 

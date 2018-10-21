@@ -32,19 +32,21 @@ public class ScrollingActivity extends AppCompatActivity implements TextScrollin
     }
 
     private void initScrollingFragment() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.text_scrolling_fragment, TextScrollingFragment.newInstance())
-                .commit();
+        TextScrollingFragment fragment = new TextScrollingFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.text_scrolling_fragment, fragment);
+        transaction.commit();
     }
 
     private void initCameraFragment() {
-        getSupportFragmentManager().beginTransaction()
+        getFragmentManager().beginTransaction()
                 .replace(R.id.camera_fragment, CameraFragment.newInstance())
                 .commit();
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.text_scrolling_fragment, TextScrollingFragment.newInstance())
-                .commit();
+        TextScrollingFragment fragment = new TextScrollingFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.text_scrolling_fragment, fragment);
+        transaction.commit();
 
     }
 

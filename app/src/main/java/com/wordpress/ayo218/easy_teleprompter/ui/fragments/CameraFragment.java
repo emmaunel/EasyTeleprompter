@@ -19,7 +19,7 @@ import top.defaults.camera.PhotographerFactory;
 import top.defaults.camera.PhotographerHelper;
 
 
-public class CameraFragment extends BaseFragment {
+public class CameraFragment extends Fragment {
 
     public static CameraFragment newInstance() {
         return new CameraFragment();
@@ -27,7 +27,6 @@ public class CameraFragment extends BaseFragment {
 
     Photographer photographer;
     PhotographerHelper photographerHelper;
-    private boolean isRecordingVideo;
 
     @Nullable
     @Override
@@ -38,68 +37,8 @@ public class CameraFragment extends BaseFragment {
         photographerHelper = new PhotographerHelper(photographer);
         cameraView.setFillSpace(true);
 //        ButterKnife.bind(this, view);
-        photographer.setOnEventListener(new Photographer.OnEventListener() {
-            @Override
-            public void onDeviceConfigured() {
-
-            }
-
-            @Override
-            public void onPreviewStarted() {
-
-            }
-
-            @Override
-            public void onZoomChanged(float zoom) {
-
-            }
-
-            @Override
-            public void onPreviewStopped() {
-
-            }
-
-            @Override
-            public void onStartRecording() {
-
-            }
-
-            @Override
-            public void onFinishRecording(String filePath) {
-                announceNewFile(filePath);
-            }
-
-            @Override
-            public void onShotFinished(String filePath) {
-
-            }
-
-            @Override
-            public void onError(Error error) {
-
-            }
-        });
-
-        if (isRecordingVideo){
-            finishRecording();
-        } else {
-            isRecordingVideo = true;
-            photographer.startRecording(null);
-        }
 
         return view;
-    }
-
-    private void announceNewFile(String filePath) {
-        Toast.makeText(getContext(), "File: " + filePath, Toast.LENGTH_LONG).show();
-
-    }
-
-    private void finishRecording() {
-        if (isRecordingVideo){
-            isRecordingVideo = false;
-            photographer.finishRecording();
-        }
     }
 
     @Override
