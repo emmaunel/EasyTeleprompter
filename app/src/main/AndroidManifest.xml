@@ -36,7 +36,8 @@
 
         <activity
             android:name=".ui.activities.EditScriptActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
 
         <activity
             android:name=".ui.activities.ScriptEditorDialog"

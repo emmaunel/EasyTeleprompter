@@ -60,7 +60,7 @@ import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment
 
 public class EditScriptFragment extends Fragment{
     private static final String TAG = "EditScriptFragment";
-
+    private final String SAVED_CONTENT = "savedContent";
     public static final String DATE_EXTRA = "date_creation";
     private static final int DEFAULT_ID = -1;
     private int scriptId = DEFAULT_ID;
@@ -105,6 +105,12 @@ public class EditScriptFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_script, container, false);
         ButterKnife.bind(this, view);
+        if (savedInstanceState != null){
+            content = savedInstanceState.getString(SAVED_CONTENT);
+            Log.e(TAG, "onCreateView: " + content);
+            script_content.setText(content);
+        }
+
         database = AppDatabase.getsInstance(getContext());
         title_txt = getActivity().findViewById(R.id.script_title);
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
@@ -269,6 +275,9 @@ public class EditScriptFragment extends Fragment{
         return Color.argb(a, Math.min(r, 255), Math.min(g, 255), Math.min(b, 255));
     }
 
-
-
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(SAVED_CONTENT, script_content.getText().toString());
+    }
 }
