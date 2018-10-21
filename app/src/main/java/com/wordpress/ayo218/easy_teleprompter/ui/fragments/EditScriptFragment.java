@@ -107,7 +107,6 @@ public class EditScriptFragment extends Fragment{
         ButterKnife.bind(this, view);
         if (savedInstanceState != null){
             content = savedInstanceState.getString(SAVED_CONTENT);
-            Log.e(TAG, "onCreateView: " + content);
             script_content.setText(content);
         }
 
