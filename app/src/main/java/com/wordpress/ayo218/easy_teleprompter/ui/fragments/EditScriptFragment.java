@@ -61,7 +61,7 @@ import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment
 
 public class EditScriptFragment extends BaseFragment {
     private static final String TAG = "EditScriptFragment";
-
+    private final String SAVED_CONTENT = "savedContent";
     public static final String DATE_EXTRA = "date_creation";
     private static final int DEFAULT_ID = -1;
     private int scriptId = DEFAULT_ID;
@@ -110,10 +110,10 @@ public class EditScriptFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_script, container, false);
         ButterKnife.bind(this, view);
-
         if (savedInstanceState != null){
-            String saved_con = savedInstanceState.getString(BUNDLE_SCRIPT_CONTENT);
-            Log.i(TAG, "onCreateView: " + saved_con);
+            content = savedInstanceState.getString(SAVED_CONTENT);
+            Log.e(TAG, "onCreateView: " + content);
+            script_content.setText(content);
         }
 
         database = AppDatabase.getsInstance(getContext());
@@ -281,37 +281,6 @@ public class EditScriptFragment extends BaseFragment {
         return Color.argb(a, Math.min(r, 255), Math.min(g, 255), Math.min(b, 255));
     }
 
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        String saved_cont = script_content.getText().toString();
-        outState.putString(BUNDLE_SCRIPT_CONTENT, saved_cont);
-    }
-
-
-    //    @Override
-//    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-//        super.onViewStateRestored(savedInstanceState);
-//        if (savedInstanceState == null) {
-//            Log.e(TAG, "onViewStateRestored: NULLLLLL" );
-//        }else{
-//            String saved = savedInstanceState.getString(BUNDLE_SCRIPT_CONTENT);
-//            Log.i(TAG, "onViewStateRestored: " + saved);
-//            script_content.setText(saved);
-//        }
-//    }
-
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        String saved_cont = script_content.getText().toString();
-        Log.i(TAG, "onViewStateRestored: " + saved_cont);
-        script_content.setText(saved_cont);
-    }
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -336,5 +305,10 @@ public class EditScriptFragment extends BaseFragment {
         }
         startActivity(new Intent(getContext(), MainActivity.class));
         getActivity().finish();
+      
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(SAVED_CONTENT, script_content.getText().toString());
     }
 }
