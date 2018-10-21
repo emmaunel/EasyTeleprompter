@@ -2,6 +2,7 @@ package com.wordpress.ayo218.easy_teleprompter.ui.fragments;
 
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,12 +26,13 @@ import android.widget.TextView;
 import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
 import com.wordpress.ayo218.easy_teleprompter.ui.customViews.ScrollingScrollView;
+import com.wordpress.ayo218.easy_teleprompter.ui.fragments.template.BaseFragment;
 import com.wordpress.ayo218.easy_teleprompter.utils.listener.ScrollViewListerner;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TextScrollingFragment extends Fragment
+public class TextScrollingFragment extends BaseFragment
         implements ScrollViewListerner{
 
     private static final String TAG = "TextScrollingFragment";
@@ -43,6 +45,8 @@ public class TextScrollingFragment extends Fragment
     private static final int UI_ANIMATION_DELAY = 300;
 
     public static final String SCRIPT_SCROLLING = "scrolling";
+
+    OnPauseListener listener;
 
     private final Handler uiRemover = new Handler();
 
@@ -71,6 +75,8 @@ public class TextScrollingFragment extends Fragment
     private String content;
     private boolean isPlaying;
 
+    private boolean isClicked;
+
     private int animationDelay;
     private int scrollOffset;
 
@@ -81,7 +87,9 @@ public class TextScrollingFragment extends Fragment
 
     private Scripts scripts = null;
 
-    public TextScrollingFragment(){}
+    public static TextScrollingFragment newInstance() {
+        return new TextScrollingFragment();
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
@@ -108,7 +116,11 @@ public class TextScrollingFragment extends Fragment
 
         if (scripts != null) {
             content_txt.setText(scripts.getContent());
-            setAnimationSpeed(3);
+            // FIXME: 9/17/18 I was here
+            content_txt.setTextColor(scripts.getFontColor());
+            scrollingScrollView.setBackgroundColor(scripts.getBackgroundColor());
+            setAnimationSpeed(scripts.getScrollSpeed());
+
         }
 
         visible = true;
@@ -229,6 +241,9 @@ public class TextScrollingFragment extends Fragment
         animationHandler.removeCallbacks(animationRunnable);
         scrollingScrollView.setScrollable(true);
         showPlayBtn();
+        // FIXME: 9/21/18 
+//        isClicked = true;
+//        listener.onClicked(isClicked);
     }
 
 
@@ -371,6 +386,20 @@ public class TextScrollingFragment extends Fragment
                 animationDelay = 30;
                 scrollOffset = 4;
                 break;
+        }
+    }
+
+    public interface OnPauseListener{
+        void onClicked(boolean clicked);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (OnPauseListener) context;
+        } catch (ClassCastException e){
+            e.printStackTrace();
         }
     }
 }

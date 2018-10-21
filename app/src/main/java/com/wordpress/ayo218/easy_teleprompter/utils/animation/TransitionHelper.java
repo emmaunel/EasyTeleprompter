@@ -1,8 +1,10 @@
 package com.wordpress.ayo218.easy_teleprompter.utils.animation;
 
 import android.app.Activity;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.util.Pair;
 import android.view.View;
 
@@ -12,6 +14,7 @@ import java.util.List;
 
 public class TransitionHelper {
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static Pair<View, String>[] createSafeTransitionParticipants(@NonNull Activity activity,
                                                                         boolean includeStatusBar, @Nullable Pair... otherParticipants) {
         // Avoid system UI glitches as described here:
@@ -35,6 +38,7 @@ public class TransitionHelper {
         return participants.toArray(new Pair[participants.size()]);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private static void addNonNullViewToTransitionParticipants(View view, List<Pair> participants) {
         if (view == null) {
             return;
