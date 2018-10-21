@@ -43,6 +43,7 @@ import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewM
 import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewModelFactory;
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
 import com.wordpress.ayo218.easy_teleprompter.ui.activities.MainActivity;
+import com.wordpress.ayo218.easy_teleprompter.ui.fragments.template.BaseFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ import static com.wordpress.ayo218.easy_teleprompter.ui.activities.ScrollingActi
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.TextScrollingFragment.SCRIPT_SCROLLING;
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment.UID;
 
-public class EditScriptFragment extends Fragment{
+public class EditScriptFragment extends BaseFragment {
     private static final String TAG = "EditScriptFragment";
     private final String SAVED_CONTENT = "savedContent";
     public static final String DATE_EXTRA = "date_creation";
@@ -94,10 +95,7 @@ public class EditScriptFragment extends Fragment{
     private EditScriptViewModelFactory factory;
     private EditScriptViewModel viewModel;
 
-    //SavedInstanceState Constant
-
-    public EditScriptFragment() {
-    }
+    public EditScriptFragment() {}
 
     @SuppressLint("CheckResult")
     @Nullable
@@ -105,15 +103,14 @@ public class EditScriptFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_script, container, false);
         ButterKnife.bind(this, view);
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             content = savedInstanceState.getString(SAVED_CONTENT);
-            Log.e(TAG, "onCreateView: " + content);
             script_content.setText(content);
         }
 
         database = AppDatabase.getsInstance(getContext());
         title_txt = getActivity().findViewById(R.id.script_title);
-        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 
         //Trying something new
         Intent intent = getActivity().getIntent();
@@ -141,36 +138,6 @@ public class EditScriptFragment extends Fragment{
             }
         }
 
-
-        ImageView done_img = getActivity().findViewById(R.id.done_btn);
-        done_img.setOnClickListener(v -> {
-            if (scriptId == DEFAULT_ID) {
-                title = intent_title;
-            } else {
-                viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
-
-            }
-
-            content = script_content.getText().toString();
-            // TODO: 8/22/2018 Change this later 
-            Scripts scripts = new Scripts(title, content, creationDate, updateDate);
-
-            if (scriptId == DEFAULT_ID) {
-                //Insert a new script
-                database.scriptDao().insertScript(scripts);
-            } else {
-                //update script
-                scripts.setUid(scriptId);
-                database.scriptDao().updateScript(scripts);
-            }
-            startActivity(new Intent(getContext(), MainActivity.class));
-            getActivity().finish();
-
-
-        });
-
-
-        //Open the text_scrolling fragment
         play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,7 +149,9 @@ public class EditScriptFragment extends Fragment{
 
                 content = script_content.getText().toString();
 
+                // FIXME: 9/17/18 Also was here
                 Scripts scripts = new Scripts(title, content);
+                Log.e(TAG, "title: " + title + " COntent: " + content);
                 Intent intent = new Intent(getContext(), ScrollingActivity.class);
                 intent.putExtra(SCRIPT_SCROLLING, scripts);
                 startActivity(intent);
@@ -228,9 +197,9 @@ public class EditScriptFragment extends Fragment{
 
         updateDate = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
     }
-    
+
     @OnClick(R.id.settings_script_button)
-    public void colorPicker(){
+    public void colorPicker() {
         ColorPicker colorPicker = new ColorPicker(getActivity());
         ArrayList<String> colors = new ArrayList<>();
         colors.add("#303030");
@@ -244,26 +213,21 @@ public class EditScriptFragment extends Fragment{
         colors.add("#FF5722");
 
 
-        colorPicker.setDefaultColorButton(Color.parseColor("#303030"))
-                .setColors(colors)
-                .setColumns(3)
-                .setRoundColorButton(true)
-                .setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                    @Override
-                    public void onChooseColor(int position, int color) {
-                        backgroundColor = color;
-                        layout.setBackgroundColor(color);
-                        toolbar.setBackgroundDrawable(new ColorDrawable(color));
-                        getActivity().getWindow().setStatusBarColor(darkenBackgroundColor(color, 0.7f));
-                    }
+        colorPicker.setDefaultColorButton(Color.parseColor("#303030")).setColors(colors).setColumns(3).setRoundColorButton(true).setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onChooseColor(int position, int color) {
+                backgroundColor = color;
+                layout.setBackgroundColor(color);
+                toolbar.setBackgroundDrawable(new ColorDrawable(color));
+                getActivity().getWindow().setStatusBarColor(darkenBackgroundColor(color, 0.7f));
+            }
 
-                    @Override
-                    public void onCancel() {
+            @Override
+            public void onCancel() {
 
-                    }
-                })
-                .show();
+            }
+        }).show();
     }
 
     private static int darkenBackgroundColor(int color, float factor) {
@@ -276,7 +240,33 @@ public class EditScriptFragment extends Fragment{
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (scriptId == DEFAULT_ID) {
+            title = intent_title;
+        } else {
+            viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
+
+        }
+
+        content = script_content.getText().toString();
+        // TODO: 8/22/2018 Change this later
+        Scripts scripts = new Scripts(title, content, creationDate, updateDate);
+
+        if (scriptId == DEFAULT_ID) {
+            //Insert a new script
+            database.scriptDao().insertScript(scripts);
+        } else {
+            //update script
+            scripts.setUid(scriptId);
+            database.scriptDao().updateScript(scripts);
+        }
+        startActivity(new Intent(getContext(), MainActivity.class));
+        getActivity().finish();
+    }
+
+    @Override
+    public void onSaveInstanceState (@NonNull Bundle outState){
         super.onSaveInstanceState(outState);
         outState.putString(SAVED_CONTENT, script_content.getText().toString());
     }

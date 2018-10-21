@@ -7,10 +7,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
+import com.wordpress.ayo218.easy_teleprompter.ui.fragments.template.BaseFragment;
 
 import top.defaults.camera.CameraView;
+import top.defaults.camera.Error;
 import top.defaults.camera.Photographer;
 import top.defaults.camera.PhotographerFactory;
 import top.defaults.camera.PhotographerHelper;

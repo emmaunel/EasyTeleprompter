@@ -2,16 +2,15 @@ package com.wordpress.ayo218.easy_teleprompter.ui.fragments;
 
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -25,12 +24,13 @@ import android.widget.TextView;
 import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
 import com.wordpress.ayo218.easy_teleprompter.ui.customViews.ScrollingScrollView;
+import com.wordpress.ayo218.easy_teleprompter.ui.fragments.template.BaseFragment;
 import com.wordpress.ayo218.easy_teleprompter.utils.listener.ScrollViewListerner;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TextScrollingFragment extends Fragment
+public class TextScrollingFragment extends BaseFragment
         implements ScrollViewListerner{
 
     private static final String TAG = "TextScrollingFragment";
@@ -43,6 +43,8 @@ public class TextScrollingFragment extends Fragment
     private static final int UI_ANIMATION_DELAY = 300;
 
     public static final String SCRIPT_SCROLLING = "scrolling";
+
+    OnPauseListener listener;
 
     private final Handler uiRemover = new Handler();
 
@@ -71,6 +73,8 @@ public class TextScrollingFragment extends Fragment
     private String content;
     private boolean isPlaying;
 
+    private boolean isClicked;
+
     private int animationDelay;
     private int scrollOffset;
 
@@ -80,8 +84,6 @@ public class TextScrollingFragment extends Fragment
     private boolean isFirsttime = false;
 
     private Scripts scripts = null;
-
-    public TextScrollingFragment(){}
 
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
@@ -102,13 +104,14 @@ public class TextScrollingFragment extends Fragment
         Intent intent = getActivity().getIntent();
         if (intent != null && intent.hasExtra(SCRIPT_SCROLLING)) {
             scripts = intent.getParcelableExtra(SCRIPT_SCROLLING);
-            Log.i(TAG, "onCreateView: Scroll Speed " + scripts.getScrollSpeed());
         }
 
 
         if (scripts != null) {
             content_txt.setText(scripts.getContent());
+            // FIXME: 9/17/18 I was here
             setAnimationSpeed(3);
+
         }
 
         visible = true;
@@ -229,6 +232,9 @@ public class TextScrollingFragment extends Fragment
         animationHandler.removeCallbacks(animationRunnable);
         scrollingScrollView.setScrollable(true);
         showPlayBtn();
+        // FIXME: 9/21/18 
+//        isClicked = true;
+//        listener.onClicked(isClicked);
     }
 
 
@@ -371,6 +377,20 @@ public class TextScrollingFragment extends Fragment
                 animationDelay = 30;
                 scrollOffset = 4;
                 break;
+        }
+    }
+
+    public interface OnPauseListener{
+        void onClicked(boolean clicked);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (OnPauseListener) context;
+        } catch (ClassCastException e){
+            e.printStackTrace();
         }
     }
 }
