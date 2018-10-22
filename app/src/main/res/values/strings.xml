@@ -59,4 +59,9 @@
     <string name="add_widget">Add widget</string>
     <string name="granted">Granted</string>
     <string name="not_granted">Not granted</string>
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+    <string name="settings">Settings</string>
+    <string name="restore_data">Restore data</string>
+    <string name="backup_data">Backup data</string>
 </resources>

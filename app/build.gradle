@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'AyoCode'
             keyPassword 'I love coding17'
-            storeFile file('C:/Users/Ayo/androidStudioProjects/Keystore.jks')
+            storeFile file('C:/Users/Ayo/androidStudioProjects/EasyTeleprompter/Keystore.jks')
             storePassword 'Emmaunel12'
         }
     }
