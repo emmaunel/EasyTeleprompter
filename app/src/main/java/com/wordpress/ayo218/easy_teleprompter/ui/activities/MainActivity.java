@@ -2,14 +2,14 @@ package com.wordpress.ayo218.easy_teleprompter.ui.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -23,12 +23,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.jakewharton.rxbinding2.view.RxView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.wordpress.ayo218.easy_teleprompter.utils.Constants;
-import com.wordpress.ayo218.easy_teleprompter.utils.animation.FabDialogMorphSetup;
 import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment;
+import com.wordpress.ayo218.easy_teleprompter.utils.Constants;
+import com.wordpress.ayo218.easy_teleprompter.utils.animation.FabDialogMorphSetup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
-
 
     @SuppressLint("CheckResult")
     @Override
@@ -76,12 +74,14 @@ public class MainActivity extends AppCompatActivity
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(granted -> {
                     if (granted) {
-                        Toast.makeText(this, R.string.granted, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(this, R.string.granted, Toast.LENGTH_SHORT).show();
                         Log.i(TAG, "File Directory: " + Constants.MEDIA_DIR);
                     } else {
                         Toast.makeText(this, R.string.not_granted, Toast.LENGTH_SHORT).show();
                     }
                 });
+
+        new NetworkAsync().execute();
     }
 
 
@@ -156,6 +156,28 @@ public class MainActivity extends AppCompatActivity
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class NetworkAsync extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+            assert connectivityManager != null;
+            NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+            Log.e(TAG, "doInBackground: Here Mother flower");
+            return info != null && info.isConnected();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            if (aBoolean){
+                Toast.makeText(MainActivity.this, "Connected", Toast.LENGTH_SHORT).show();
+            } else{
+                Toast.makeText(MainActivity.this, "Not connected", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 }

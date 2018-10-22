@@ -65,6 +65,13 @@
         <service android:name=".utils.widget.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS"
             android:exported="false"/>
+
+        <service android:name=".utils.BackUpService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name= "com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

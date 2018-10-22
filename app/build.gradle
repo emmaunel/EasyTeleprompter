@@ -66,6 +66,10 @@ dependencies {
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
 
+
+    //Background stuff(Please work)
+    implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
