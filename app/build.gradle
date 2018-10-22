@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'AyoCode'
+            keyPassword 'I love coding17'
+            storeFile file('C:/Users/Ayo/androidStudioProjects/Keystore.jks')
+            storePassword 'Emmaunel12'
+        }
+    }
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
@@ -16,6 +24,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
@@ -39,7 +48,6 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
-
     //Room database
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
@@ -47,29 +55,21 @@ dependencies {
     //the newer version isn't working
     implementation 'android.arch.lifecycle:extensions:1.1.0'
     annotationProcessor 'android.arch.lifecycle:compiler:1.1.0'
-
     //Rich editor
     implementation 'jp.wasabeef:richeditor-android:1.2.2'
-
     //Debug database
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
-
     implementation 'com.android.support:support-v13:27.1.1'
     //pref
     implementation 'com.android.support:preference-v7:27.1.1'
-
     //Color picker
     implementation 'petrov.kristiyan:colorpicker-library:1.1.8'
-
     //Camera
     implementation 'com.github.duanhong169:camera:1.0.3'
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
-
-
     //Background stuff(Please work)
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
-
 }
 
 apply plugin: 'com.google.gms.google-services'
