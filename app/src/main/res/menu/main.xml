@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_search"
-        android:title="Search"
+        android:title="@string/search"
         android:icon="@drawable/ic_search_black_24dp"
         app:showAsAction="ifRoom"/>
     <item
@@ -15,6 +15,6 @@
 
     <item
         android:id="@+id/action_filter"
-        android:title="Filter"
+        android:title="@string/filter"
         app:showAsAction="never"/>
 </menu>

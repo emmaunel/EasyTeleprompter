@@ -71,6 +71,7 @@
         android:layout_gravity="center_horizontal|bottom">
 
         <Button
+            android:contentDescription="@string/play"
             android:id="@+id/btn_play"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -80,6 +81,7 @@
             style="@style/Widget.AppCompat.Button.Colored"/>
 
         <Button
+            android:contentDescription="@string/pause"
             android:id="@+id/btn_pause"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

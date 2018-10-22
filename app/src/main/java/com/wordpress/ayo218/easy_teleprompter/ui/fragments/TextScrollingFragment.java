@@ -109,7 +109,6 @@ public class TextScrollingFragment extends BaseFragment
 
         if (scripts != null) {
             content_txt.setText(scripts.getContent());
-            // FIXME: 9/17/18 I was here
             setAnimationSpeed(3);
 
         }
@@ -240,7 +239,7 @@ public class TextScrollingFragment extends BaseFragment
 
     @Override
     public void onScrollChanged(ScrollingScrollView scrollView, int x, int y, int oldx, int oldy) {
-        View view = (View) scrollView.getChildAt(scrollView.getChildCount() - 1);
+        View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
         int difference = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
         if (difference <= 40) {
             if (animationHandler != null) {

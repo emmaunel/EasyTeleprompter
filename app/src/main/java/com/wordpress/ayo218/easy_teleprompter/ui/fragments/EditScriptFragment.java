@@ -1,12 +1,9 @@
 package com.wordpress.ayo218.easy_teleprompter.ui.fragments;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -14,35 +11,24 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.jakewharton.rxbinding2.view.RxView;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.wordpress.ayo218.easy_teleprompter.R;
-import com.wordpress.ayo218.easy_teleprompter.ui.activities.ScrollingActivity;
 import com.wordpress.ayo218.easy_teleprompter.database.AppDatabase;
 import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewModel;
 import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.EditScriptViewModelFactory;
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
 import com.wordpress.ayo218.easy_teleprompter.ui.activities.MainActivity;
+import com.wordpress.ayo218.easy_teleprompter.ui.activities.ScrollingActivity;
 import com.wordpress.ayo218.easy_teleprompter.ui.fragments.template.BaseFragment;
 
 import java.text.SimpleDateFormat;
@@ -56,8 +42,8 @@ import butterknife.OnClick;
 import petrov.kristiyan.colorpicker.ColorPicker;
 
 import static com.wordpress.ayo218.easy_teleprompter.ui.activities.ScrollingActivity.DOUBLE_FRAGMENT;
-import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.TextScrollingFragment.SCRIPT_SCROLLING;
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment.UID;
+import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.TextScrollingFragment.SCRIPT_SCROLLING;
 
 public class EditScriptFragment extends BaseFragment {
     private static final String TAG = "EditScriptFragment";
@@ -149,9 +135,7 @@ public class EditScriptFragment extends BaseFragment {
 
                 content = script_content.getText().toString();
 
-                // FIXME: 9/17/18 Also was here
                 Scripts scripts = new Scripts(title, content);
-                Log.e(TAG, "title: " + title + " COntent: " + content);
                 Intent intent = new Intent(getContext(), ScrollingActivity.class);
                 intent.putExtra(SCRIPT_SCROLLING, scripts);
                 startActivity(intent);

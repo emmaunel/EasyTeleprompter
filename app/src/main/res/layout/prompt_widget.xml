@@ -6,6 +6,15 @@
     android:layout_margin="8dp"
     android:padding="8dp">
 
+    <TextView
+        android:id="@+id/script_widget_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/scripts"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/extra_large" />
+
     <ListView
         android:id="@+id/script_widget_list"
         android:layout_width="match_parent"

@@ -74,7 +74,6 @@ public class ScriptFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                // TODO: 8/17/2018 Maybe use viewmodel or something
                 AppExecutors.getsInstance().diskIO().execute(() -> {
                     int position = viewHolder.getAdapterPosition();
                     List<Scripts> scripts = adapter.getScriptsList();
