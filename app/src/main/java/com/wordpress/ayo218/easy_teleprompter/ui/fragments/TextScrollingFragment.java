@@ -109,7 +109,6 @@ public class TextScrollingFragment extends BaseFragment
 
         if (scripts != null) {
             content_txt.setText(scripts.getContent());
-            // FIXME: 9/17/18 I was here
             setAnimationSpeed(3);
 
         }

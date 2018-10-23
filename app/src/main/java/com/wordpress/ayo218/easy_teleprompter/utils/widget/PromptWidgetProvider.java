@@ -16,9 +16,11 @@ import com.wordpress.ayo218.easy_teleprompter.ui.activities.MainActivity;
 public class PromptWidgetProvider extends AppWidgetProvider {
 
     private void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId){
+        // FIXME: 10/22/2018 Be able to update the widget when a new list is added
+        // TODO: 10/22/2018 Change the layout of the widge to feature the pinned item(soon to be implemented)
         PendingIntent intent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), 0);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.prompt_widget);
-        views.setOnClickPendingIntent(R.id.script_widget_txt, intent);
+        views.setOnClickPendingIntent(R.id.script_widget_title, intent);
 
         Intent intent1 = new Intent(context, WidgetService.class);
         intent1.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
