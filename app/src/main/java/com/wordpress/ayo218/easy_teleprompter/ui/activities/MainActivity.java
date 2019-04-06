@@ -85,6 +85,10 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    /**
+     * Initialize script fragment which will have the list of the
+     * scripts
+     */
     private void initFragment() {
         ScriptFragment fragment = new ScriptFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -92,6 +96,10 @@ public class MainActivity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * Rather than showing the dialog quick, I created a fancy animation
+     * than shows how the fab button translate from a fab to a dialog
+     */
     @SuppressLint({"NewApi", "RestrictedApi"})
     @OnClick(R.id.fab)
     protected void fabClick(){
@@ -102,6 +110,9 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(intent, EDIT_CODE, options.toBundle());
     }
 
+    /**
+     * if the drawer is open, close it or else exit the app
+     */
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -111,13 +122,23 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Inflate the main menu and add items to the action bar it is present.
+     * @param menu main menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+    /**
+     * Responsible for listening for clicks on the main menu.
+     * And based on the item, it does something different. Obviously
+     * @param item menu items
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -133,6 +154,12 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Respnsible for listening for clicks on the drawer menu.
+     * As you can see, not yet done.
+     * @param item
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -158,6 +185,11 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Required by Udacity. But when you open the app, I imedidaltly check
+     * if there's internet connection so that I back up the user's data to
+     * firebase.
+     */
     @SuppressLint("StaticFieldLeak")
     private class NetworkAsync extends AsyncTask<Void, Void, Boolean> {
         @Override

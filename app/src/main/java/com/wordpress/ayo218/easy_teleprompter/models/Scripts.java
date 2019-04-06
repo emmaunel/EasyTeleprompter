@@ -33,6 +33,13 @@ public class Scripts implements Parcelable{
     }
 
     @Ignore
+    public Scripts(String title, String content, int scrollSpeed){
+        this.title = title;
+        this.content = content;
+        this.scrollSpeed = scrollSpeed;
+    }
+
+    @Ignore
     public Scripts(String title, String content, String date_created, String date_updated) {
         this.title = title;
         this.content = content;

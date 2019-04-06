@@ -16,22 +16,6 @@
         tools:ignore="UnknownIdInLayout">
 
 
-            <!--<EditText-->
-                <!--android:id="@+id/script_title_txt"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:background="@android:color/transparent"-->
-                <!--android:focusable="true"-->
-                <!--android:hint="@string/title_hint"-->
-                <!--android:inputType="textCapSentences"-->
-                <!--android:paddingEnd="12dp"-->
-                <!--android:paddingLeft="12dp"-->
-                <!--android:paddingStart="12dp"-->
-                <!--android:paddingTop="8dp"-->
-                <!--android:textColorHint="@android:color/white"-->
-                <!--android:textSize="@dimen/large_text"-->
-                <!--android:textStyle="bold" />-->
-
         <EditText
             android:id="@+id/script_content_txt"
             android:layout_width="match_parent"

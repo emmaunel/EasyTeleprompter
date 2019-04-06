@@ -35,6 +35,8 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/large_text"/>
 
+
+
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout

@@ -9,9 +9,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.adapters.ScriptsAdapter;
@@ -21,12 +23,18 @@ import com.wordpress.ayo218.easy_teleprompter.database.ViewModel.ScriptViewModel
 import com.wordpress.ayo218.easy_teleprompter.models.Scripts;
 import com.wordpress.ayo218.easy_teleprompter.ui.activities.EditScriptActivity;
 import com.wordpress.ayo218.easy_teleprompter.utils.animation.GridSpacingItemDecoration;
+import com.wordpress.ayo218.easy_teleprompter.utils.listener.OnItemClickListener;
+import com.wordpress.ayo218.easy_teleprompter.utils.listener.OnLongItemPressed;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * This is the main screen of the app. It has the list of the scripts.
+ * @author ayo
+ */
 public class ScriptFragment extends Fragment {
     private static final String TAG = "ScriptFragment";
 
@@ -35,7 +43,7 @@ public class ScriptFragment extends Fragment {
     @BindView(R.id.script_view)
     RecyclerView recyclerView;
 
-    ScriptsAdapter adapter;
+    private ScriptsAdapter adapter;
 
     private AppDatabase database;
 
@@ -63,7 +71,8 @@ public class ScriptFragment extends Fragment {
          * An ItemTouchHelper enables touch behaviour (like swipe and move) on each viewHolder,
          * and uses callbacks to signal when a user is performing these actions.
          */
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN |
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder holder) {
                 int source = viewHolder.getAdapterPosition();
@@ -86,6 +95,9 @@ public class ScriptFragment extends Fragment {
     }
 
 
+    /**
+     * Connection between the database and UI
+     */
     private void setupViewModel() {
         ScriptViewModel viewModel = ViewModelProviders.of(getActivity()).get(ScriptViewModel.class);
         viewModel.getScripts().observe(getActivity(), scriptsList -> {
@@ -101,4 +113,5 @@ public class ScriptFragment extends Fragment {
             recyclerView.setAdapter(adapter);
         });
     }
+
 }

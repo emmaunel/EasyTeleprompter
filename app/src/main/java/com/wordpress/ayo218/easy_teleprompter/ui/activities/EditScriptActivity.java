@@ -7,13 +7,20 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.transition.Visibility;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wordpress.ayo218.easy_teleprompter.R;
 import com.wordpress.ayo218.easy_teleprompter.ui.fragments.EditScriptFragment;
@@ -24,6 +31,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Activity for Edit Script. It has the edit fragment in it
+ * @author ayo
+ */
 public class EditScriptActivity extends AppCompatActivity{
     private static final String TAG = "EditScriptActivity";
     @BindView(R.id.toolbar)
@@ -31,7 +42,7 @@ public class EditScriptActivity extends AppCompatActivity{
     @BindView(R.id.script_title)
     TextView title_txt;
 
-    String title;
+    //String title;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -66,10 +77,14 @@ public class EditScriptActivity extends AppCompatActivity{
     private Visibility buildEnterTransition(){
         Slide slide = new Slide();
         slide.setDuration(500);
-        slide.setSlideEdge(Gravity.RIGHT);
+        slide.setSlideEdge(Gravity.END);
         return slide;
     }
 
+    /**
+     * I think this is bad but If I didn't do it, it doesn't to the main screen(long time since I
+     * looked it). So I "forced" to do to the main activity.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -78,13 +93,15 @@ public class EditScriptActivity extends AppCompatActivity{
         finish();
     }
 
+    /**
+     * I honestly don't remember what this does but it does something magical.
+     */
     private void tellFragments() {
        List<Fragment> fragments = getSupportFragmentManager().getFragments();
        for (Fragment f : fragments){
-           if (f != null && f instanceof BaseFragment){
+           if (f instanceof BaseFragment){
                ((BaseFragment)f).onBackPressed();
            }
        }
     }
-
 }

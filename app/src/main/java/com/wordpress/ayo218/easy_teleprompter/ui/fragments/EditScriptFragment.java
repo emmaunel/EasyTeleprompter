@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +46,14 @@ import static com.wordpress.ayo218.easy_teleprompter.ui.activities.ScrollingActi
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.ScriptFragment.UID;
 import static com.wordpress.ayo218.easy_teleprompter.ui.fragments.TextScrollingFragment.SCRIPT_SCROLLING;
 
+/**
+ * Fragment for the editing screen
+ * @author ayo
+ */
 public class EditScriptFragment extends BaseFragment {
     private static final String TAG = "EditScriptFragment";
     private final String SAVED_CONTENT = "savedContent";
+    private final String  CONTENT_SPEED = "speed";
     public static final String DATE_EXTRA = "date_creation";
     private static final int DEFAULT_ID = -1;
     private int scriptId = DEFAULT_ID;
@@ -67,14 +73,11 @@ public class EditScriptFragment extends BaseFragment {
     TextView title_txt;
 
     private String creationDate, title, content, updateDate;
-    private int textColor;
     private int backgroundColor;
-    private int scrollSpeed;
-    private int fontSize;
-    private boolean textMirroed;
+
 
     //title from new script
-    String intent_title;
+    private String intent_title;
 
     private AppDatabase database;
 
@@ -124,52 +127,43 @@ public class EditScriptFragment extends BaseFragment {
             }
         }
 
-        play_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (scriptId == DEFAULT_ID) {
-                    title = intent_title;
-                } else {
-                    viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
-                }
 
-                content = script_content.getText().toString();
-
-                Scripts scripts = new Scripts(title, content);
-                Intent intent = new Intent(getContext(), ScrollingActivity.class);
-                intent.putExtra(SCRIPT_SCROLLING, scripts);
-                startActivity(intent);
+        play_btn.setOnClickListener(v -> {
+            if (scriptId == DEFAULT_ID) {
+                title = intent_title;
+            } else {
+                viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
             }
+
+            content = script_content.getText().toString();
+
+            Scripts scripts = new Scripts(title, content);
+            Intent scolling = new Intent(getContext(), ScrollingActivity.class);
+            scolling.putExtra(SCRIPT_SCROLLING, scripts);
+            startActivity(scolling);
         });
 
 
         //Open camera and text_scrolling fragments
-        record_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (scriptId == DEFAULT_ID) {
-                    title = intent_title;
-                } else {
-                    viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
-                }
-
-                content = script_content.getText().toString();
-
-                Scripts scripts = new Scripts(title, content);
-                Intent intent = new Intent(getContext(), ScrollingActivity.class);
-                intent.putExtra(DOUBLE_FRAGMENT, "hi");
-                intent.putExtra(SCRIPT_SCROLLING, scripts);
-                startActivity(intent);
+        record_btn.setOnClickListener(view1 -> {
+            if (scriptId == DEFAULT_ID) {
+                title = intent_title;
+            } else {
+                viewModel.getScriptsLiveData().observe(getActivity(), scripts -> title = scripts.getTitle());
             }
+
+            content = script_content.getText().toString();
+
+            Scripts scripts = new Scripts(title, content);
+            Intent scroll_camera = new Intent(getContext(), ScrollingActivity.class);
+            scroll_camera.putExtra(DOUBLE_FRAGMENT, "hi");
+            scroll_camera.putExtra(SCRIPT_SCROLLING, scripts);
+            startActivity(scroll_camera);
         });
 
         return view;
     }
 
-    private int setSpeedNumber(int scroll) {
-        scrollSpeed = scroll;
-        return scrollSpeed;
-    }
 
     private void populateUI(Scripts scripts) {
         if (scripts == null) {
@@ -182,6 +176,10 @@ public class EditScriptFragment extends BaseFragment {
         updateDate = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
     }
 
+    /**
+     * Display a color picker so the user has the chance to change
+     * the editor background.
+     */
     @OnClick(R.id.settings_script_button)
     public void colorPicker() {
         ColorPicker colorPicker = new ColorPicker(getActivity());
@@ -197,7 +195,8 @@ public class EditScriptFragment extends BaseFragment {
         colors.add("#FF5722");
 
 
-        colorPicker.setDefaultColorButton(Color.parseColor("#303030")).setColors(colors).setColumns(3).setRoundColorButton(true).setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+        colorPicker.setDefaultColorButton(Color.parseColor("#303030")).setColors(colors).setColumns(3).
+                setRoundColorButton(true).setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onChooseColor(int position, int color) {
@@ -214,6 +213,13 @@ public class EditScriptFragment extends BaseFragment {
         }).show();
     }
 
+    /**
+     * Fancy method to change make the toolbar slightly darker than the editor
+     * badckground. It doesn't work. Sad boy
+     * @param color
+     * @param factor
+     * @return
+     */
     private static int darkenBackgroundColor(int color, float factor) {
         int a = Color.alpha(color);
         int r = Math.round(Color.red(color) * factor);
@@ -223,6 +229,10 @@ public class EditScriptFragment extends BaseFragment {
         return Color.argb(a, Math.min(r, 255), Math.min(g, 255), Math.min(b, 255));
     }
 
+    /**
+     * Because I wanted to have a similar functionality as google notes, there is no save
+     * button but when you press the back button, it is automatically saved.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -249,6 +259,11 @@ public class EditScriptFragment extends BaseFragment {
         getActivity().finish();
     }
 
+    /**
+     * To prevent user's text to magically disappering during a rotation,
+     *  this method will save an instant of the text so users don't kill me.
+     * @param outState
+     */
     @Override
     public void onSaveInstanceState (@NonNull Bundle outState){
         super.onSaveInstanceState(outState);
