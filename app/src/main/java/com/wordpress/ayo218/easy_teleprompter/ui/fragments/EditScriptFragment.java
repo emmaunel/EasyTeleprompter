@@ -201,6 +201,7 @@ public class EditScriptFragment extends BaseFragment {
             @Override
             public void onChooseColor(int position, int color) {
                 backgroundColor = color;
+                Log.e(TAG, "onChooseColor: " + backgroundColor);
                 layout.setBackgroundColor(color);
                 toolbar.setBackgroundDrawable(new ColorDrawable(color));
                 getActivity().getWindow().setStatusBarColor(darkenBackgroundColor(color, 0.7f));
@@ -215,7 +216,7 @@ public class EditScriptFragment extends BaseFragment {
 
     /**
      * Fancy method to change make the toolbar slightly darker than the editor
-     * badckground. It doesn't work. Sad boy
+     * background. It doesn't work. Sad boy
      * @param color
      * @param factor
      * @return
